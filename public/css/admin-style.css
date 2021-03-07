@@ -1,0 +1,24 @@
+.admin-action-menu{
+    left: -33% !important;
+}
+.my-form-checkbox{
+    margin-left: 40%;
+    width: 13px;
+    height: 13px;
+}
+.my-form-checkbox:hover{
+	cursor: pointer;
+}
+.alert-right-fixed{
+    position: fixed;
+    right: 2%;
+    bottom: .11%;
+}
+.alert-right-fixed .close{
+    position: relative;
+    margin-top: -2px;
+    margin-left: 7px;
+}
+.post-title-action a:not(:first-child){
+	margin-left: 12px !important;
+}

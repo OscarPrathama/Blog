@@ -1,0 +1,20 @@
+pages
+=======================
+login
+register
+dashboade
+posts
+create post
+edit post
+post category
+create post category
+edit post category
+users
+profile
+settings
+menu
+frontpage
+post detail                 -> http://localhost:8000/aspernatur-beatae-delectus-sed-id-rem-numquam
+contact us
+about us
+location
