@@ -29,7 +29,6 @@ Route::middleware('auth')->group(function(){
         Route::get('edit/{id}', 'Admin\PostController@edit')->name('posts-edit');
         Route::post('update/{id}', 'Admin\PostController@update')->name('posts-update');
         Route::get('delete/{id}', 'Admin\PostController@delete')->name('posts-delete');
-        // Route::get('{slug}', 'Admin\PostController@show')->name('posts-show');
         Route::post('bulk-action', 'Admin\PostController@bulkAction')->name('posts-bulk-action');
     });
 });

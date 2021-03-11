@@ -22,3 +22,18 @@
 .post-title-action a:not(:first-child){
 	margin-left: 12px !important;
 }
+
+.invalid-feedback{
+    display: block;
+}
+
+#imgPreview{
+	width: 200px;
+	display: block;
+    margin: 11px auto;
+}
+
+#removeImgPreview{
+    display: none;
+    margin-left: 18%;
+}

@@ -65,8 +65,8 @@
                                 </td>
                                 <td class="post-column">
                                     {{-- post title --}}
-                                    <a 
-                                        href="{{ route('posts-show', ['slug' => $value->post_slug]) }}" 
+                                    <a
+                                        href="{{ route('posts-show', ['slug' => $value->post_slug]) }}"
                                         target="_blank"
                                         class="text-decoration-none post-title">
                                             {{ Str::limit($value->post_title, 120, '...') }}
@@ -77,7 +77,7 @@
                                         <a href="{{ route('posts-show', ['slug' => $value->post_slug]) }}" target="_blank" class="text-decoration-none">View</a>
                                         <a href="javascript:void(0)" class="text-decoration-none quick-edit-btn">Quick Edit</a>
                                         <a href="{{ route('posts-edit', ['id' => $value->id]) }}" class="text-decoration-none edit-post">Edit</a>
-                                        <a href="{{ route('posts-delete', ['id' => $value->id]) }}" class="text-decoration-none delete-post">Delete</a>
+                                        <a href="{{ route('posts-delete', ['id' => $value->id]) }}" class="text-decoration-none delete-post" onclick="return confirm('Are you sure')">Delete</a>
                                     </div>
 
                                     {{-- post edit field --}}
@@ -91,11 +91,11 @@
                                                         <input type="text" class="form-control mb-2" name="new_post_title" placeholder="New Title" value="{{ $value->post_title }}">
                                                         <input type="hidden" class="form-control" name="post_id" value="{{ $value->id }}">
                                                         <select name="post_status" id="post-{{ $value->id }}" class="form-select mb-2">
-                                                            <option value="1" {{ $value->post_status == '1' ? 'selected' : '' }}>Publish</option>
-                                                            <option value="0" {{ $value->post_status == '0' ? 'selected' : '' }}>Draft</option>
+                                                            <option value="publish" {{ $value->post_status == 'publish' ? 'selected' : '' }}>Publish</option>
+                                                            <option value="draft" {{ $value->post_status == 'draft' ? 'selected' : '' }}>Draft</option>
                                                         </select>
                                                         <div class="d-flex justify-content-between">
-                                                            <button type="button" class="cancel-quick-edit btn btn-danger">Cancel</button>
+                                                            <button type="button" class="cancel-quick-edit btn btn-danger">Close</button>
                                                             <input type="submit" name="submit_quick_edit" class="btn btn-primary" value="Update">
                                                         </div>
                                                     </form>
@@ -106,7 +106,7 @@
 
                                 </td>
                                 <td>{{ $value->post_author }}</td>
-                                <td class="post-status">{{ $value->post_status == 1 ? 'Publish' : 'Draft' }}</td>
+                                <td class="post-status">{{ $value->post_status }}</td>
                                 <td>{{ $value->created_at->format('d M, Y') }}</td>
                             </tr>
                         @empty
@@ -155,7 +155,7 @@ $(function(){
             type: "POST",
             dataType: 'JSON',
             url: "{{ route('posts-quick-edit') }}",
-            data:post_data,  
+            data:post_data,
             beforeSend: function(){
                 console.log('loading...')
                 parents_column.find('[name=submit_quick_edit]').attr('value', 'Loading...');

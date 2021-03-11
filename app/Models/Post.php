@@ -10,7 +10,7 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'post_title', 'post_slug', 'post_type', 'post_content', 'post_status'
+        'user_id', 'post_title', 'post_slug', 'post_type', 'post_content', 'post_status'
     ];
 
     static function getPosts(){
@@ -19,7 +19,7 @@ class Post extends Model
                 -> where('post_type', 'post')
                 -> latest()
                 -> paginate(10);
-        
+
         return $results;
     }
 

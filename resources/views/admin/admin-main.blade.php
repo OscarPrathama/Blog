@@ -28,6 +28,8 @@
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('vendor/tinymce/jquery.tinymce.min.js') }}"></script>
 <script src="{{ asset('js/admin-script.js') }}"></script>
 <!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--

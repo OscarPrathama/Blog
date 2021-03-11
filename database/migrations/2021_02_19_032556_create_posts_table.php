@@ -20,7 +20,8 @@ class CreatePostsTable extends Migration
             $table->string('post_slug', 100)->unique();
             $table->string('post_type');
             $table->longText('post_content')->nullable();
-            $table->enum('post_status', ['0', '1']);
+            $table->string('post_status', 20);
+            // $table->enum('post_status', ['0', '1']);
             $table->timestamps();
         });
     }

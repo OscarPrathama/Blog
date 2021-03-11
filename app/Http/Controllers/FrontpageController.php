@@ -38,7 +38,7 @@ class FrontpageController extends Controller
         return view('single', $data);
     }
 
-    // fail, belum diterapin di navbar
+    // belum, msh fail dan tidak diterapkan di navbar
     function menu(){
         $data['menus'] = array(
             array(
