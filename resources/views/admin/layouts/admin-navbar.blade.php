@@ -26,13 +26,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{{ route('dashboard') }}">
+                    <a class="nav-link " aria-current="page" href="{{ route('media') }}">
                         Media
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{{ route('dashboard') }}">
-                        Comments
                     </a>
                 </li>
                 <li class="nav-item">

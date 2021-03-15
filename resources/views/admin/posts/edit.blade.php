@@ -17,12 +17,18 @@
 		@csrf
 		<div class="row create-post-form">
 			<div class="col-8">
+                <input type="hidden" name="post_id" value="{{ $post->id }}">
 				<input type="text" name="post_title" class="form-control mb-1 @error('post_title') is-invalid @enderror" placeholder="Post title" value="{{ old('post_title') ?? $post->post_title }}">
 				@error('post_title') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
 
                 <input type="text" name="post_slug" style="width: 400px;" class="form-control form-control-sm @error('post_slug') is-invalid @enderror" placeholder="Post slug" value="{{ old('post_slug') ?? $post->post_slug }}">
                 @error('post_slug') <div class="invalid-feedback">{{ $message }}</div> @enderror
-
+                <p class="small">
+                    Preview :
+                    <a href="{{ route('posts-show', ['slug' => $post->post_slug]) }}" target="_blank">
+                        {{ route('posts-show', ['slug' => $post->post_slug]) }}
+                    </a>
+                </p>
                 <div class="mb-4"></div>
 
 				<textarea name="post_content" id="postContent" cols="30" rows="10" placeholder="Post content" class="form-control mt-4 @error('post_content') is-invalid @enderror">{{ $post->post_content }}</textarea>
@@ -58,7 +64,20 @@
                             <div class="accordion-body">
                                 <div class="form-group">
                                     <div class="img-label mt-2 mb-4">
-                                        <label for="exampleFormControlFile1">Example file input</label>
+                                        @if ($post_meta && $post_meta != null && !empty($post_meta->post_image_feature))
+                                            <img
+                                                src="{{ asset('storage'.$post_meta->post_image_feature->url) }}"
+                                                alt="{{ $post_meta->post_image_feature->just_name }}"
+                                                id="imgPreview">
+                                        @else
+                                            <img
+                                                src=""
+                                                alt=""
+                                                id="imgPreview">
+                                        @endif
+                                        <a href="javascript:void(0)" id="removeImgPreview" onclick="return confirm('Are you sure ?')">
+                                            Remove
+                                        </a>
                                     </div>
                                     <input type="file" name="post_img_feature" class="form-control-file" id="exampleFormControlFile1">
                                     @error('post_img_feature') <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -73,3 +92,12 @@
 	</form>
 </div>
 @endsection
+
+
+@section('script')
+<script type="text/javascript">
+$(function(){
+
+})
+</script>
+@stop

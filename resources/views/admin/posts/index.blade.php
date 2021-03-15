@@ -16,8 +16,6 @@
     <div class="row mb-2">
         <div class="col-md-6">
             <a href="{{ route('posts-create') }}" class="btn btn-primary">Add new</a>
-            <a href="#posts-export" class="btn btn-success">Export to Excel</a>
-            <a href="#posts-export" class="btn btn-danger">Export to PDF</a>
         </div>
         <div class="col-md-3"></div>
         <div class="col-md-3">

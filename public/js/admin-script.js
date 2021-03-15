@@ -54,7 +54,7 @@ $(function(){
         }else{
             remove_img_preview.css('display', 'none');
         }
-    }
+    }imgSrcCheck();
 
     function readURL(input){
         if (input.files && input.files[0]){

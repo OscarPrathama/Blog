@@ -23,6 +23,27 @@ class Post extends Model
         return $results;
     }
 
+    static function getFpPosts(){
+        $results = Post::leftJoin('post_metas', 'posts.id', '=', 'post_metas.post_id')
+                -> select('posts.*', 'post_metas.key as meta_key', 'post_metas.value as meta_value')
+                -> where('post_type', 'post')
+                -> limit(9)
+                -> latest()
+                -> get();
+
+        return $results;
+    }
+
+    static function getBlogPosts(){
+        $results = Post::leftJoin('users', 'posts.user_id', '=', 'users.id')
+                -> join('post_metas', 'posts.id', '=', 'post_metas.post_id')
+                -> select('posts.*', 'users.name as post_author', 'post_metas.value as meta_value')
+                -> latest()
+                -> paginate(10);
+
+        return $results;
+    }
+
     function postMeta(){
         return $this->hasMany(PostMeta::class);
     }

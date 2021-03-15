@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+require __DIR__.'/auth.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -12,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/admin/dashboard', 'Admin\DashboardController@index')->middleware(['auth'])->name('dashboard');
 
@@ -31,14 +28,19 @@ Route::middleware('auth')->group(function(){
         Route::get('delete/{id}', 'Admin\PostController@delete')->name('posts-delete');
         Route::post('bulk-action', 'Admin\PostController@bulkAction')->name('posts-bulk-action');
     });
+
+    Route::prefix('admin/media')->group(function(){
+        Route::get('/', 'Admin\MediaController@index')->name('media');
+    });
 });
 
 Route::get('/', 'FrontpageController@index')->name('frontpage');
+Route::get('/blogs', 'BlogController@index')->name('blogs');
+Route::get('/about-us', 'AboutUsController@index')->name('about-us');
+Route::get('/contact', 'ContactController@index')->name('contact');
 
 // Route::get('/admin/dashboard', function () {
 //     return view('__dashboard');
 // })->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
 
 Route::get('{slug}', 'FrontpageController@show')->name('posts-show');

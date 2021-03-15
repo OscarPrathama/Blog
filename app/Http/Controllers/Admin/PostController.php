@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\PostMeta;
-// use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -53,7 +52,7 @@ class PostController extends Controller
         $last_inserted_id = Post::create([
             'user_id' => $request->post_author,
             'post_title' => $request->post_title,
-            'post_slug' => \Str::slug($request->post_title),
+            'post_slug' => \Str::slug($request->post_slug),
             'post_type' => 'post',
             'post_content' => $request->post_content,
             'post_status' => $request->post_status,
@@ -71,6 +70,11 @@ class PostController extends Controller
     function edit($id){
         $data['title'] = 'Edit Post';
         $data['post'] = Post::find($id);
+        $get_post_meta = self::getPostMeta($id);
+        $data['post_meta'] = null;
+        if ( $get_post_meta ) {
+            $data['post_meta'] = json_decode($get_post_meta->value);
+        }
 
         return view('admin.posts.edit', $data);
     }
@@ -79,20 +83,30 @@ class PostController extends Controller
 
         self::postValidate($request);
 
-        /*
-
         if ($request->hasFile('post_img_feature')) {
-            $image = self::imgValidate($request);
-        }else{
-             $image = ''; // tetap menyimpan data sebelumnya
-        }
 
-        $meta['post_image_feature'] = $image;
-        */
+            // validate img
+            $image = self::imgValidate($request);
+
+            // save imgValidate return to variable
+            $meta['post_image_feature'] = $image;
+
+            // get current post meta value
+            $post_meta = self::getPostMeta($id);
+
+            // update image on folder
+            $img_old_path = json_decode($post_meta->value);
+            \Storage::delete('/public'.$img_old_path->post_image_feature->url);
+
+            // save to database
+            $post_meta->value = json_encode($meta);
+            $post_meta->save();
+
+        }
 
         $post = Post::find($id);
         $post->post_title = $request->post_title;
-        $post->post_slug = $request->post_slug;
+        $post->post_slug = \Str::slug($request->post_slug);
         $post->post_content = $request->post_content;
         $post->post_status = $request->post_status;
         $post->save();
@@ -135,7 +149,7 @@ class PostController extends Controller
     private static function postValidate($request){
         $request->validate([
             'post_title' => 'required',
-            'post_slug' => 'required|unique:posts|max:150'
+            'post_slug' => 'required|max:150|unique:posts,post_slug,'.$request->post_id // Forcing A Unique Rule To Ignore A Given ID
         ]);
     }
 
@@ -166,7 +180,7 @@ class PostController extends Controller
             }
 
             $request->post_img_feature->storeAs(
-                $destination,
+                '/public'.$destination,
                 $img_upload_name
             );
 
@@ -174,6 +188,12 @@ class PostController extends Controller
 
             return $image;
         }
+    }
+
+    static function getPostMeta($post_id){
+        return PostMeta::where( 'post_id', '=', $post_id )
+                            -> where( 'key', '=', 'post_meta' )
+                            -> first();
     }
 
 }
