@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //
+    function myProfile(){
+        return 'hello user';
+    }
 }

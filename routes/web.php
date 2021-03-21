@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 
@@ -15,6 +14,7 @@ require __DIR__.'/auth.php';
 */
 
 Route::get('/admin/dashboard', 'Admin\DashboardController@index')->middleware(['auth'])->name('dashboard');
+Route::get('/admin/my-profile', 'Admin\UserController@myProfile')->middleware(['auth'])->name('my-profile');
 
 Route::middleware('auth')->group(function(){
     Route::prefix('admin/posts')->group(function () {
@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function(){
 
     Route::prefix('admin/media')->group(function(){
         Route::get('/', 'Admin\MediaController@index')->name('media');
+        Route::post('/update_image', 'Admin\MediaController@updateImg')->name('media-update');
+        Route::post('/delete_image', 'Admin\MediaController@deleteImg')->name('media-delete');
     });
 });
 

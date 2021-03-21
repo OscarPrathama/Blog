@@ -54,7 +54,11 @@ $(function(){
         }else{
             remove_img_preview.css('display', 'none');
         }
-    }imgSrcCheck();
+    }
+
+    if( img_preview.length != 0 ){
+        imgSrcCheck()
+    }
 
     function readURL(input){
         if (input.files && input.files[0]){

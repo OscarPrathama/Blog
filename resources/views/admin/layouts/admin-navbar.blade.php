@@ -15,14 +15,14 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->is('admin/posts') ? ' active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Posts
+                        Posts
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('posts-index') }}">All Posts</a></li>
                         <li><a class="dropdown-item" href="{{ route('posts-create') }}">Add New</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Add New Category</a></li>
-                        <li><a class="dropdown-item" href="#">Categories</a></li>
+                        {{-- <li><hr class="dropdown-divider"></li> --}}
+                        {{-- <li><a class="dropdown-item" href="#">Add New Category</a></li> --}}
+                        {{-- <li><a class="dropdown-item" href="#">Categories</a></li> --}}
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -43,6 +43,12 @@
                         <li><a class="dropdown-item" href="#">General</a></li>
                         <li><a class="dropdown-item" href="#">Menus</a></li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->is('admin/my-profile') ? ' active' : '' }}"
+                        aria-current="page"
+                        href="{{ route('my-profile') }}">My Profile</a>
                 </li>
             </ul>
 
