@@ -31,17 +31,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{{ route('dashboard') }}">
+                    <a class="nav-link " aria-current="page" href="{{ route('inbox.index') }}">
                         Inbox
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ request()->is('admin/settings') ? ' active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle {{ request()->is('admin/settings') ? ' active' : '' }}" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Settings
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">General</a></li>
-                        <li><a class="dropdown-item" href="#">Menus</a></li>
+                        <li><a class="dropdown-item" href="{{ route('settings.index') }}">General</a></li>
+                        <li><a class="dropdown-item" href="{{ route('menus.index') }}">Menus</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

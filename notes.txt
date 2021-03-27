@@ -18,3 +18,10 @@ post detail                 -> http://localhost:8000/aspernatur-beatae-delectus-
 contact us
 about us
 location
+
+
+my notes
+=======================
+-> admin menu field msh salah
+    -> menu > index.blade.php
+    -> admin-script

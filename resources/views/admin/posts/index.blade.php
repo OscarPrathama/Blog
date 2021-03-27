@@ -147,7 +147,7 @@ $(function(){
             new_post_title: parents_form.find('[name=new_post_title]').val(),
             new_post_status: parents_form.find('select[name=post_status]').val()
         };
-        console.log( $this.parents('tr') )
+        // console.log( $this.parents('tr') )
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             type: "POST",

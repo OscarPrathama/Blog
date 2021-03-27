@@ -17,6 +17,8 @@ Route::get('/admin/dashboard', 'Admin\DashboardController@index')->middleware(['
 Route::get('/admin/my-profile', 'Admin\UserController@myProfile')->middleware(['auth'])->name('my-profile');
 
 Route::middleware('auth')->group(function(){
+
+    // posts
     Route::prefix('admin/posts')->group(function () {
         Route::get('/', 'Admin\PostController@index')->name('posts-index');
         Route::get('search', 'Admin\PostController@search')->name('posts-search');
@@ -29,17 +31,40 @@ Route::middleware('auth')->group(function(){
         Route::post('bulk-action', 'Admin\PostController@bulkAction')->name('posts-bulk-action');
     });
 
+    // media
     Route::prefix('admin/media')->group(function(){
         Route::get('/', 'Admin\MediaController@index')->name('media');
         Route::post('/update_image', 'Admin\MediaController@updateImg')->name('media-update');
         Route::post('/delete_image', 'Admin\MediaController@deleteImg')->name('media-delete');
+    });
+
+    // search
+    Route::prefix('admin/')->group(function(){
+        // put on the top from resource route, so it can be found
+        Route::get('inbox/search/', 'Admin\InboxController@searchInbox')->name('inbox.search');
+        Route::post('inbox/ajax_delete', 'Admin\InboxController@deleteInbox')->name('ajax.inbox.delete');
+        Route::post('inbox/bulk_action', 'Admin\InboxController@bulkAction')->name('inbox.bulk.action');
+
+        Route::resource('inbox', 'Admin\InboxController');
+    });
+
+    // setting
+    Route::prefix('admin/settings')->group(function(){
+        Route::get('/general', 'Admin\SettingController@index')->name('settings.index');
+        Route::post('/general/update_or_create', 'Admin\SettingController@_updateOrCreate')->name('settings.updateOrCreate');
+    });
+
+    // menu
+    Route::prefix('admin/menu')->group(function(){
+        Route::get('', 'Admin\MenuController@index')->name('menus.index');
+        Route::post('/update_or_create', 'Admin\MenuController@_updateOrCreate')->name('menus.store');
     });
 });
 
 Route::get('/', 'FrontpageController@index')->name('frontpage');
 Route::get('/blogs', 'BlogController@index')->name('blogs');
 Route::get('/about-us', 'AboutUsController@index')->name('about-us');
-Route::get('/contact', 'ContactController@index')->name('contact');
+Route::get('/contact-us', 'ContactController@index')->name('contact-us');
 
 // Route::get('/admin/dashboard', function () {
 //     return view('__dashboard');

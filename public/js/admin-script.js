@@ -1,8 +1,8 @@
-$(function(){
+(function($){
 
     // bulks admin checkbox
-    var $table = $('.admin-post-table');
-    var $chkbxs = $('.admin-post-table .ch-bulks');
+    var $table = $('.admin-post-table, .admin-inbox-table');
+    var $chkbxs = $('.admin-post-table .ch-bulks, .admin-inbox-table .ch-bulks');
     var last_checked = null;
     $chkbxs.on('click', function(e){
         if (!last_checked){
@@ -70,4 +70,72 @@ $(function(){
         }
     }
 
-});
+
+    // admin menu form custom field
+    var MaxInputs               = 2; // row menu limit
+    var InputsWrapper           = $("#InputsWrapper");
+    var AddButton               = $("#AddField");
+    var InputsWrapperLength     = InputsWrapper.length;
+
+    $(AddButton).on('click', function(){
+
+        var FieldMenuWrapperLength  = $('.field-menu-wrapper').length;
+        FieldMenuWrapperLength++;
+
+        if (InputsWrapperLength >= 1) {
+            $(InputsWrapper).append(`
+                <div id="field_`+FieldMenuWrapperLength+`" class="field-menu-wrapper mt-3">
+                    <input type="text" name="menus[row-`+FieldMenuWrapperLength+`][menu_title]" value="" placeholder="Menu Title" class="my-form-control">
+                    <input type="text" name="menus[row-`+FieldMenuWrapperLength+`][menu_link]" value="" placeholder="Menu Link" class="my-form-control" size="30">
+                    <a href="javascript:void(0)" class="removeclass">Remove</a>
+                </div>
+            `);
+            InputsWrapperLength++;
+            $(AddButton).show();
+
+            // delete add button
+            if(InputsWrapperLength === 3){
+                $(AddButton).hide();
+            }
+            return false
+        }
+    });
+
+    if ($('.field-menu-wrapper').length > 1) {
+        $('.field-menu-wrapper').not(':first').append(`
+            <a href="javascript:void(0)" class="removeclass">Remove</a>
+        `);
+        $('.removeclass').on('click', function(){
+            $(this).parent().remove();
+        });
+    }
+
+    $('body').on('click', '.removeclass', function(){
+        if (InputsWrapperLength > 1) {
+            var $this = $(this);
+            $this.parent().remove();
+            InputsWrapperLength--;
+            $(AddButton).show();
+        }
+        return false;
+    });
+
+
+    // jquery plugin
+    $.fn.textRight = function(){
+        this.css('text-align', 'right');
+        return this;
+    }
+
+    $('.admin-menu-action-column').textRight();
+
+    $.fn.notFirstEl = function(class_name){
+        this.not(':first').addClass(class_name);
+    }
+
+    $('div#InputsWrapper .field-menu-wrapper').notFirstEl('mt-3');
+
+}(jQuery));
+
+
+
