@@ -25,3 +25,4 @@ my notes
 -> admin menu field msh salah
     -> menu > index.blade.php
     -> admin-script
+-> admin post edit msh blom bsa apus gambar

@@ -179,10 +179,14 @@ class PostController extends Controller
                 }
             }
 
+            // upload to storage/app/public
             $request->post_img_feature->storeAs(
                 '/public'.$destination,
                 $img_upload_name
             );
+
+            // upload to public/storage
+            // $path = request()->post_img_feature->move(public_path('storage'.$destination), $img_upload_name);
 
             $image['url'] = $destination.'/'.$img_upload_name;
 

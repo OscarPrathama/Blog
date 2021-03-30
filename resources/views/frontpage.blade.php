@@ -74,7 +74,8 @@
                             <h5 class="card-title">{{ $value->post_title }}</h5>
                         </a>
                         <p class="card-text">
-                            {!! Str::limit($value->post_content, 150, '...') !!}
+                            {{-- belum : buat helper --}}
+                            {{ strip_tags(htmlspecialchars_decode(Str::limit($value->post_content, 150, '...'))) }}
                         </p>
                     </div>
                 </div>
@@ -82,7 +83,6 @@
         @empty
             <h3>There is no posts</h3>
         @endforelse
-
     </div>
 </div>
 
