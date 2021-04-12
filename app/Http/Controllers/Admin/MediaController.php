@@ -12,7 +12,6 @@ class MediaController extends Controller
     function index(){
         $images = PostMeta::all();
         $data['title'] = 'Images';
-        // $data['images'] = array(); b
         foreach($images as $key => $value){
             $get_img_data = json_decode($value->value);
             $data['images'][$key]['id'] = $value->id;

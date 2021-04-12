@@ -1,23 +1,29 @@
-pages
+admin pages
 =======================
-login
-register
-dashboade
+dashboard
 posts
 create post
 edit post
 post category
 create post category
 edit post category
-users
-profile
+media
+inbox
 settings
-menu
-frontpage
-post detail                 -> http://localhost:8000/aspernatur-beatae-delectus-sed-id-rem-numquam
-contact us
-about us
-location
+    - general
+    - menu
+profile
+
+visitor pages
+=======================
+register
+login
+frontpage       -> http://localhost:8000/
+post detail     -> http://localhost:8000/aspernatur-beatae-delectus-sed-id-rem-numquam
+blogs           -> http://localhost:8000/blogs
+about us        -> http://localhost:8000/about-us
+contact us      -> http://localhost:8000/contact-us
+
 
 
 my notes
@@ -25,4 +31,4 @@ my notes
 -> admin menu field msh salah
     -> menu > index.blade.php
     -> admin-script
--> admin post edit msh blom bsa apus gambar
+-> contact us -> set recaptcha

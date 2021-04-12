@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function(){
         Route::post('store', 'Admin\PostController@store')->name('posts-store');
         Route::post('quick_update', 'Admin\PostController@quickUpdate')->name('posts-quick-edit');
         Route::get('edit/{id}', 'Admin\PostController@edit')->name('posts-edit');
+        Route::post('edit/remove_img/', 'Admin\PostController@editRemoveImage')->name('posts-edit-remove-image');
         Route::post('update/{id}', 'Admin\PostController@update')->name('posts-update');
         Route::get('delete/{id}', 'Admin\PostController@delete')->name('posts-delete');
         Route::post('bulk-action', 'Admin\PostController@bulkAction')->name('posts-bulk-action');

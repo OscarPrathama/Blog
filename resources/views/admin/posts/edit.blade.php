@@ -75,7 +75,7 @@
                                                 alt=""
                                                 id="imgPreview">
                                         @endif
-                                        <a href="javascript:void(0)" id="removeImgPreview" onclick="return confirm('Are you sure ?')">
+                                        <a href="javascript:void(0)" id="removeImgPreview">
                                             Remove
                                         </a>
                                     </div>
@@ -95,9 +95,37 @@
 
 
 @section('script')
-<script type="text/javascript">
-$(function(){
+<script>
+let remove_img_preview = $('.post-edit a#removeImgPreview');
+let img_preview = $('#imgPreview');
+remove_img_preview.on('click', function(){
 
-})
+    function imgSrcCheck(){
+        if( img_preview.attr('src').length != '' ){
+            remove_img_preview.css('display', 'block');
+        }else{
+            remove_img_preview.css('display', 'none');
+        }
+    }
+
+    if(confirm('Are you sure ?') == true){
+        img_preview.attr('src', '');
+        img_preview.attr('alt', '');
+        $('[name=post_img_feature]').val('');
+        imgSrcCheck();
+
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: "POST",
+            url: "{{ route('posts-edit-remove-image') }}",
+            data: {
+                post_id: $('[name=post_id]').val()
+            },
+            success: function (res) {
+                console.log(res)
+            }
+        });
+    }
+});
 </script>
 @stop

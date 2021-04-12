@@ -79,6 +79,21 @@ class PostController extends Controller
         return view('admin.posts.edit', $data);
     }
 
+    function editRemoveImage(){
+
+        $post_meta = PostMeta::where('post_id', '=', $_POST['post_id'])->firstOrFail();
+        $decode_img = json_decode($post_meta->value);
+        $decode_img->post_image_feature = '';
+        $encode_img = json_encode($decode_img);
+        $save_post_meta = PostMeta::updateOrCreate(
+            ['post_id' => $_POST['post_id']],
+            ['value' => $encode_img],
+        );
+        return response([
+            'msg' => 'Image deleted !'
+        ]);
+    }
+
     function update(Request $request, $id){
 
         self::postValidate($request);
@@ -96,7 +111,9 @@ class PostController extends Controller
 
             // update image on folder
             $img_old_path = json_decode($post_meta->value);
-            \Storage::delete('/public'.$img_old_path->post_image_feature->url);
+            if( !empty($img_old_path->post_image_feature->url) ){
+                \Storage::delete('/public'.$img_old_path->post_image_feature->url);
+            }
 
             // save to database
             $post_meta->value = json_encode($meta);
