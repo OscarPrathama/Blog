@@ -16,7 +16,7 @@
 	<form action="{{ route('posts-update', ['id' => $post->id]) }}" method="POST" class="post-form" enctype="multipart/form-data">
 		@csrf
 		<div class="row create-post-form">
-			<div class="col-8">
+			<div class="col col-lg-9 mb-sm-5 mb-5">
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
 				<input type="text" name="post_title" class="form-control mb-1 @error('post_title') is-invalid @enderror" placeholder="Post title" value="{{ old('post_title') ?? $post->post_title }}">
 				@error('post_title') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
@@ -34,7 +34,7 @@
 				<textarea name="post_content" id="postContent" cols="30" rows="10" placeholder="Post content" class="form-control mt-4 @error('post_content') is-invalid @enderror">{{ $post->post_content }}</textarea>
 				@error('post_content') <div class="invalid-feedback">{{ $message }}</div> @enderror
 			</div>
-			<div class="col-4">
+			<div class="col col-lg-3">
                 <div class="accordion mb-4" id="postStatusAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="postStatusDialog">
@@ -46,7 +46,7 @@
                             <div class="accordion-body">
                                 <div class="card-body d-flex justify-content-between">
 					                <input type="submit" name="post_status" class="btn btn-warning text-capitalize" value="draft">
-					                <input type="submit" name="post_status" class="btn btn-primary text-capitalize" value="publish">
+					                <input type="submit" name="post_status" class="btn btn-primary text-capitalize" value="Update">
 					            </div>
                             </div>
                         </div>

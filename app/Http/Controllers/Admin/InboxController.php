@@ -13,6 +13,7 @@ class InboxController extends Controller
     {
         $data['inboxes'] = Inbox::orderBy('id', 'desc')
                                 -> paginate(10)
+                                -> onEachSide(1)
                                 -> withQueryString();
         $data['title'] = 'Inbox';
 

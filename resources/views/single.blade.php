@@ -13,8 +13,13 @@
                 <small>Created at : <i>{{ $post->created_at->diffForHumans() }}</i></small>
             </div>
             <div class="post-img-featured text-center">
-                @if ( $post_meta != null )
-                    <img src="{{ asset('storage'.$post_meta->post_image_feature->url) }}" alt="{{ $post_meta->post_image_feature->name }}" class="w-75 p-3 mb-5">
+
+
+                @if ( isset($post_meta)
+                        && $post_meta !=''
+                        && $post_meta->post_image_feature !='' )
+                    <img src="{{ asset('storage'.$post_meta->post_image_feature->url) }}"
+                         alt="{{ $post_meta->post_image_feature->name }}" class="w-75 p-3 mb-5">
                 @endif
             </div>
             <div class="post-content">

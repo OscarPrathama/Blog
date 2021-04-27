@@ -163,6 +163,12 @@ class PostController extends Controller
         ]);
     }
 
+    function postApi(){
+        $Posts = Post::all();
+
+        return $Posts->toJson();
+    }
+
     private static function postValidate($request){
         $request->validate([
             'post_title' => 'required',

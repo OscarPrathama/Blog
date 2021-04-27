@@ -21,7 +21,7 @@
     tinymce.init({
         selector: 'textarea#postContent',
         height: 500,
-        menubar: true,
+        // menubar: true,
         plugins: [
             'advlist autolink lists link image charmap print preview anchor',
             'searchreplace visualblocks code fullscreen',

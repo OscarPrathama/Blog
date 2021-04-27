@@ -15,21 +15,21 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ asset('images/123.jpg') }}" class="d-block w-100" alt="...">
+                <img src="{{ asset('images/admiral.jpg') }}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>First slide label</h5>
                     <p>Some representative placeholder content for the first slide.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('images/671267.jpg') }}" class="d-block w-100" alt="...">
+                <img src="{{ asset('images/bloodseeker.jpg') }}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
                     <p>Some representative placeholder content for the second slide.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('images/admiral.jpg') }}" class="d-block w-100" alt="...">
+                <img src="{{ asset('images/bristleback.jpg') }}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
                     <p>Some representative placeholder content for the third slide.</p>
@@ -66,9 +66,10 @@
                         && !empty($value['meta_value']['post_image_feature']) )
                         <?php $bg_url = asset('storage'.$value['meta_value']['post_image_feature']['url']); ?>
                     @else
-                        <?php $bg_url = asset('images/2.jpg'); ?>
+                        <?php $bg_url = asset('images/1-dota.jpg'); ?>
                     @endif
-                    <a href="{{ route('posts-show', ['slug' => $value->post_slug]) }}" class="img-wrapper" style="background-image: url('{{ $bg_url }}')"></a>
+                    <a  href="{{ route('posts-show', ['slug' => $value->post_slug]) }}"
+                        class="img-wrapper" style="background-image: url('{{ $bg_url }}')"></a>
                     <div class="card-body">
                         <a href="{{ route('posts-show', ['slug' => $value->post_slug]) }}" class="text-decoration-none">
                             <h5 class="card-title">{{ $value->post_title }}</h5>

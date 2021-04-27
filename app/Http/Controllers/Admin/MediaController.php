@@ -10,7 +10,7 @@ use Session, Redirect;
 class MediaController extends Controller
 {
     function index(){
-        $images = PostMeta::all();
+        $images = PostMeta::latest()->get();
         $data['title'] = 'Images';
         foreach($images as $key => $value){
             $get_img_data = json_decode($value->value);

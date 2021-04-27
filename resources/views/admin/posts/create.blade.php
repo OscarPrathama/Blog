@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-<div class="container my-5">
+<div class="container my-5 create-post-container">
 
 	<div class="row">
 		<div class="col12">
@@ -16,7 +16,7 @@
 	<form action="{{ route('posts-store') }}" method="POST" class="post-form" enctype="multipart/form-data">
 		@csrf
 		<div class="row create-post-form">
-			<div class="col-8">
+			<div class="col col-lg-9 mb-sm-5 mb-5">
                 <input type="hidden" name="post_author" value="{{ Auth::user()->id }}">
 				<input type="text" name="post_title" class="form-control mb-1 @error('post_title') is-invalid @enderror" placeholder="Post title" value="{{ old('post_title') }}">
 				@error('post_title') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
@@ -29,7 +29,7 @@
 				<textarea name="post_content" id="postContent" cols="30" rows="10" placeholder="Post content" class="form-control mt-4 @error('post_content') is-invalid @enderror"></textarea>
 				@error('post_content') <div class="invalid-feedback">{{ $message }}</div> @enderror
 			</div>
-			<div class="col-4">
+			<div class="col col-lg-3">
                 <div class="accordion mb-4" id="postStatusAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="postStatusDialog">
@@ -64,7 +64,11 @@
                                             Remove
                                         </a>
                                     </div>
-                                    <input type="file" name="post_img_feature" class="form-control-file" id="exampleFormControlFile1">
+                                    <label for="exampleFormControlFile1" class="btn btn-default btn-bordered btn-gray">
+                                        Upload Images
+                                    </label>
+                                    <input  type="file" name="post_img_feature"
+                                            class="form-control-file d-none" id="exampleFormControlFile1">
                                     @error('post_img_feature') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
                             </div>

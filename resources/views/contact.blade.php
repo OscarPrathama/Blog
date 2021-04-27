@@ -5,6 +5,12 @@
 @stop
 
 @section('content')
+{{-- banner --}}
+<div class="contact-us-banner d-flex justify-content-center"
+     style="background:url( {{ imgDefault() }} )">
+</div>
+
+{{-- content --}}
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-6">

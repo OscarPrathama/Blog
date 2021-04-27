@@ -12,6 +12,10 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12">
+            {{-- Belum --}}
+            <a href="javascript:void(0)" class="btn btn-primary mb-4">Add New</a>
+        </div>
         @foreach ($images as $key => $value)
             @if( isset($value['data']->url) )
                 <div class="col-md-3 col-sm-6 col-6">
@@ -59,9 +63,12 @@
                         <div class="col-md-7">
                             <form action="" method="POST" onsubmit="return false">
                                 @csrf
-                                <div class="mb-3">
+                                <div class="mb-3 overflow-auto">
                                     <label for="img_alt" class="col-form-label">Image ALT</label>
                                     <input type="text" class="form-control" name="img_alt" id="img_alt" value="">
+
+                                    <label for="img_url" class="col-form-label">Source</label>
+                                    <small id="img_url"></small>
                                 </div>
                             </form>
                         </div>
@@ -92,6 +99,7 @@ $(function(){
 
         $('#media_img').attr('src', img_src);
         $('#media_img').attr('alt', img_alt);
+        $('#img_url').text(img_src);
         $('[name=img_alt]').val(img_alt);
 
     });

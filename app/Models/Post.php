@@ -18,7 +18,8 @@ class Post extends Model
                 -> select('posts.*', 'users.name as post_author')
                 -> where('post_type', 'post')
                 -> latest()
-                -> paginate(10);
+                -> paginate(10)
+                -> onEachSide(1);
 
         return $results;
     }

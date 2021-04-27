@@ -15,19 +15,19 @@
         @forelse ($posts as $key => $value)
             <div class="col">
                 <div class="card h-100">
-                    @if ( isset($value->meta_value->post_image_feature)
-                        && !empty($value->meta_value->post_image_feature) )
-                        <?php $bg_url = asset('storage'.$value->meta_value->post_image_feature->url); ?>
-                    @else
-                        <?php $bg_url = asset('images/2.jpg'); ?>
-                    @endif
+                    @php
+                        isset($value->meta_value->post_image_feature) &&
+                        !empty($value->meta_value->post_image_feature) ?
+                        $bg_url = getImg($value->meta_value->post_image_feature->url) :
+                        $bg_url = imgDefault();
+                    @endphp
                     <a href="{{ route('posts-show', ['slug' => $value->post_slug]) }}" class="img-wrapper" style="background-image: url('{{ $bg_url }}')"></a>
                     <div class="card-body">
                         <a href="{{ route('posts-show', ['slug' => $value->post_slug]) }}" class="text-decoration-none">
                             <h5 class="card-title">{{ $value->post_title }}</h5>
                         </a>
                         <p class="card-text">
-                            {!! Str::limit($value->post_content, 150, '...') !!}
+                            {{ contentPostFormat($value->post_content, 150, '...') }}
                         </p>
                     </div>
                 </div>

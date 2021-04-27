@@ -66,6 +66,7 @@ Route::get('/', 'FrontpageController@index')->name('frontpage');
 Route::get('/blogs', 'BlogController@index')->name('blogs');
 Route::get('/about-us', 'AboutUsController@index')->name('about-us');
 Route::get('/contact-us', 'ContactController@index')->name('contact-us');
+Route::get('/posts-api', 'Admin\PostController@postApi')->name('posts-api');
 
 // Route::get('/admin/dashboard', function () {
 //     return view('__dashboard');
