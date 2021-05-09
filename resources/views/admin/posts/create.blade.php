@@ -9,7 +9,7 @@
 
 	<div class="row">
 		<div class="col12">
-			<h3>Create new post</h3>
+			<h3>{{ __('Create new post') }}</h3>
 		</div>
 	</div>
 

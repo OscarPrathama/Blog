@@ -20,7 +20,7 @@
     // create post page
     tinymce.init({
         selector: 'textarea#postContent',
-        height: 500,
+        height: 400,
         // menubar: true,
         plugins: [
             'advlist autolink lists link image charmap print preview anchor',

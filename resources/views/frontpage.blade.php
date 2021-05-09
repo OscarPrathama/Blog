@@ -88,19 +88,29 @@
 </div>
 
 {{-- location & contact us --}}
-<div class="container my-5">
+<div class="container my-5 fp-inbox-container">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h3 class="mb-3">{{ __('Feel free to contact us') }}</h3>
-            <form action="" method="POST">
+            <form action="" method="POST" id="fp_inbox">
                 @csrf
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+                    <label for="name" class="form-label">{{ __('Name') }}</label>
+                    <input  type="name" class="form-control @error('name') is-invalid @enderror"
+                            name="name" value="{{ old('name') }}">
+                    @error('name') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="message" class="form-label">Your message</label>
-                    <textarea class="form-control" name="message" id="message" rows="6"></textarea>
+                    <label for="email" class="form-label">{{ __('Email address') }}</label>
+                    <input  type="email" class="form-control @error('name') is-invalid @enderror"
+                            name="email" value="{{ old('name') }}">
+                    @error('email') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">{{ __('Your message') }}</label>
+                    <textarea   class="form-control @error('name') is-invalid @enderror"
+                                name="message" rows="6">{{ old('message') }}</textarea>
+                    @error('message') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
                 </div>
                 <div class="mb-3">
                     <input type="submit" class="btn btn-primary">
@@ -108,6 +118,10 @@
             </form>
         </div>
     </div>
+</div>
+<div class="alert alert-success alert-dismissible fade fp-inbox" role="alert">
+    <strong>Success</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
 {{-- our location --}}
@@ -120,3 +134,53 @@
     loading="lazy"></iframe>
 </div>
 @stop
+
+@section('script')
+<script>
+$(function(){
+
+    $('form#fp_inbox').on('submit', function(e){
+        e.preventDefault();
+
+        var fp_container = $('.fp-inbox-container'),
+        set_name = fp_container.find('[name=name]').val(),
+        set_email = fp_container.find('[name=email]').val(),
+        set_message = fp_container.find('[name=message]').val();
+
+        if ( set_name != '' && set_email != '' && set_message != '' ) {
+
+            var inbox_data = {
+                name: set_name,
+                email: set_email,
+                message: set_message
+            };
+            console.log(inbox_data);
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: "POST",
+                dataType: 'JSON',
+                url: "{{ route('fp-store-inbox') }}",
+                data: inbox_data,
+                beforeSend: function(){
+                    console.log('loading...');
+                    fp_container.find('[type=submit]').attr('value', 'Loading...');
+                },
+                success: function (res) {
+                    fp_container.find('[type=submit]').attr('value', 'Submit');
+                    $('.fp-inbox').addClass('show');
+                },
+            });
+        }else{
+            alert('All field must be filled !');
+        }
+
+    })
+
+
+
+
+
+
+})
+</script>
+@endsection

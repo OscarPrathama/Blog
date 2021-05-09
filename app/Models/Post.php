@@ -13,6 +13,9 @@ class Post extends Model
         'user_id', 'post_title', 'post_slug', 'post_type', 'post_content', 'post_status'
     ];
 
+    /*
+    * Posts
+    */
     static function getPosts(){
         $results = Post::leftJoin('users', 'posts.user_id', '=', 'users.id')
                 -> select('posts.*', 'users.name as post_author')
@@ -47,5 +50,31 @@ class Post extends Model
 
     function postMeta(){
         return $this->hasMany(PostMeta::class);
+    }
+
+    /*
+    * Pages
+    */
+    static function getPages(){
+        $results = Post::leftJoin('users', 'posts.user_id', '=', 'users.id')
+                -> select('posts.*', 'users.name as post_author')
+                -> where('post_type', 'page')
+                -> latest()
+                -> paginate(10)
+                -> onEachSide(1);
+
+        return $results;
+    }
+
+    static function getPagesBySearch($search_query){
+        $results = Post::leftJoin('users', 'posts.user_id', '=', 'users.id')
+                            -> select('posts.*', 'users.name as post_author')
+                            -> where('post_type', 'page')
+                            -> where('post_title', 'like', "%".$search_query."%")
+                            -> orWhere('post_status', 'like', "%".$search_query)
+                            -> latest()
+                            -> paginate(10)
+                            -> withQueryString();
+        return $results;
     }
 }

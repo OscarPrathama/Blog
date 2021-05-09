@@ -18,6 +18,31 @@ Route::get('/admin/my-profile', 'Admin\UserController@myProfile')->middleware(['
 
 Route::middleware('auth')->group(function(){
 
+    // pages
+    Route::prefix('admin/pages')->group(function(){
+        Route::get('/', 'Admin\PageController@index')->name('pages-index');
+        Route::get('show', 'Admin\PageController@store')->name('pages-show');
+        Route::get('create', 'Admin\PageController@create')->name('pages-create');
+        Route::get('bulk-action', 'Admin\PageController@store')->name('pages-bulk-action');
+        Route::get('search', 'Admin\PageController@store')->name('pages-search');
+        Route::get('edit/{id}', 'Admin\PageController@edit')->name('pages-edit');
+        Route::post('edit/remove_img/', 'Admin\PageController@editRemoveImage')->name('pages-edit-remove-image');
+        Route::get('update', 'Admin\PageController@store')->name('pages-update');
+        Route::post('quick-update', 'Admin\PageController@quickUpdate')->name('pages-quick-edit');
+
+
+
+
+        /*
+        Route::get('store', 'Admin\PageController@store')->name('pages-store');
+        Route::get('delete', 'Admin\PageController@store')->name('pages-delete');
+        */
+    });
+
+    // Route::prefix('admin/pages/frontpage')->group(function(){
+    //     Route::get('edit/{id}', 'Admin\PageController@create')->name('pages-edit');
+    // });
+
     // posts
     Route::prefix('admin/posts')->group(function () {
         Route::get('/', 'Admin\PostController@index')->name('posts-index');
@@ -63,6 +88,7 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::get('/', 'FrontpageController@index')->name('frontpage');
+Route::post('/', 'FrontpageController@storeInbox')->name('fp-store-inbox');
 Route::get('/blogs', 'BlogController@index')->name('blogs');
 Route::get('/about-us', 'AboutUsController@index')->name('about-us');
 Route::get('/contact-us', 'ContactController@index')->name('contact-us');

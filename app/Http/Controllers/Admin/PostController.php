@@ -21,6 +21,7 @@ class PostController extends Controller
         $q = $request->s;
         $data['posts'] = Post::leftJoin('users', 'posts.user_id', '=', 'users.id')
                             -> select('posts.*', 'users.name as post_author')
+                            -> where('post_type', 'post')
                             -> where('post_title', 'like', "%".$q."%")
                             -> orWhere('post_status', 'like', "%".$q)
                             -> latest()

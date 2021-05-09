@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\PostMeta;
+use App\Models\Inbox;
 
 class FrontpageController extends Controller
 {
@@ -20,6 +21,20 @@ class FrontpageController extends Controller
         $data['location'] = 'contoh location';
 
         return view('frontpage', $data);
+    }
+
+    function storeInbox(Request $request){
+
+        Inbox::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'message' => $request->message,
+        ]);
+
+        return response()->json([
+            'success' => 'Saved',
+        ]);
+
     }
 
     function show($slug){
@@ -62,4 +77,5 @@ class FrontpageController extends Controller
     static function getPostMeta($post_id){
         return PostMeta::where( 'post_id', '=', $post_id )->first();
     }
+
 }

@@ -75,6 +75,13 @@ footer .copyright-container{
     background-size: cover !important;
     background-position: center !important;
 }
+.fp-inbox{
+    width: 150px;
+    position: fixed;
+    bottom: 2%;
+    z-index: 1;
+    right: 2%;
+}
 /* end */
 
 

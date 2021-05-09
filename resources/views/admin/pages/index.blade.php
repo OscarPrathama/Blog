@@ -5,43 +5,48 @@
 @stop
 
 @section('content')
-<div class="container mt-4">
+<div class="container my-4">
 
+    {{-- page title --}}
     <div class="row mb-4">
         <div class="col-md-12">
-            <h3>Posts</h3>
+            <h3>{{ 'Pages' }}</h3>
         </div>
     </div>
 
+    {{-- actions --}}
     <div class="row mb-2">
         <div class="col-md-6">
-            <a href="{{ route('posts-create') }}" class="btn btn-primary mb-sm-3 mb-3">Add new</a>
+            <a href="{{ route('pages-create') }}" class="btn btn-primary mb-sm-3 mb-3">Add new</a>
+            <a href="{{ route('pages-create') }}" class="btn btn-success mb-sm-3 mb-3">Import Excel</a>
+            <a href="{{ route('pages-create') }}" class="btn btn-success mb-sm-3 mb-3">Export Excel</a>
+            <a href="{{ route('pages-create') }}" class="btn btn-danger mb-sm-3 mb-3">Generate PDF</a>
         </div>
         <div class="col-md-3"></div>
         <div class="col-md-3">
-            <form action="{{ route('posts-search') }}" method="get">
+            <form action="{{ route('pages-index') }}" method="get">
                 <div class="form-group mb-sm-3 mb-3">
                     <input  type="search" name="s" class="form-control" value="{{ htmlentities(request()->s) }}"
-                            placeholder="Search posts">
+                            placeholder="Search pages">
                 </div>
             </form>
         </div>
     </div>
 
-    <form action="{{ route('posts-bulk-action') }}" method="POST">
+    <form action="{{ route('pages-bulk-action') }}" method="POST">
         @csrf
         <div class="row mb-3">
             <div class="col-md-3">
                 <select name="bulk_action" id="bulk_action" class="form-select mb-sm-3 mb-3">
                     <option value="0" disabled selected>Bulk Action</option>
-                    <option value="delete">Delete</option>
+                    {{-- <option value="delete">Delete</option> --}}
                 </select>
             </div>
             <div class="col-md-3">
                 <input type="submit" class="btn btn-primary">
             </div>
             <div class="col-md-3"></div>
-            <div class="col-md-3 text-end">Total : {{ $posts->total() }} results</div>
+            <div class="col-md-3 text-end">Total : {{ $pages->total() }} results</div>
         </div>
 
         <div class="row">
@@ -50,7 +55,7 @@
                     <table class="table table-striped table-hover table-bordered admin-post-table">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center">Bulks</th>
+                                {{-- <th scope="col" class="text-center">Bulks</th> --}}
                                 <th scope="col">Title</th>
                                 <th scope="col">Author</th>
                                 <th scope="col">Status</th>
@@ -58,11 +63,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($posts as $key => $value)
+                            @forelse ($pages as $key => $value)
                                 <tr>
+                                    {{--
                                     <td>
                                         <input type="checkbox" name="bulks[]" value="{{ $value->id }}" data-id="{{ $value->id }}" class="my-form-checkbox ch-bulks">
                                     </td>
+                                    --}}
                                     <td class="post-column">
                                         {{-- post title --}}
                                         <a
@@ -76,8 +83,8 @@
                                         <div class="post-title-action" data-post-id="{{ $value->id }}">
                                             <a href="{{ route('posts-show', ['slug' => $value->post_slug]) }}" target="_blank" class="text-decoration-none">View</a>
                                             <a href="javascript:void(0)" class="text-decoration-none quick-edit-btn">Quick Edit</a>
-                                            <a href="{{ route('posts-edit', ['id' => $value->id]) }}" class="text-decoration-none edit-post">Edit</a>
-                                            <a href="{{ route('posts-delete', ['id' => $value->id]) }}" class="text-decoration-none delete-post" onclick="return confirm('Are you sure')">Delete</a>
+                                            <a href="{{ route('pages-edit', ['id' => $value->id]) }}" class="text-decoration-none edit-post">Edit</a>
+                                            {{-- <a href="{{ route('pages-delete', ['id' => $value->id]) }}" class="text-decoration-none delete-post" onclick="return confirm('Are you sure')">Delete</a> --}}
                                         </div>
 
                                         {{-- post edit field --}}
@@ -118,7 +125,7 @@
                     </table>
                 </div>
                 <div class="pagination">
-                    {{ $posts->links() }}
+                    {{ $pages->links() }}
                 </div>
             </div>
         </div>
@@ -155,7 +162,7 @@ $(function(){
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             type: "POST",
             dataType: 'JSON',
-            url: "{{ route('posts-quick-edit') }}",
+            url: "{{ route('pages-quick-edit') }}",
             data:post_data,
             beforeSend: function(){
                 console.log('loading...')
