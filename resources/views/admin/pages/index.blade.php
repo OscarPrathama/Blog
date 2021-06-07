@@ -55,7 +55,6 @@
                     <table class="table table-striped table-hover table-bordered admin-post-table">
                         <thead>
                             <tr>
-                                {{-- <th scope="col" class="text-center">Bulks</th> --}}
                                 <th scope="col">Title</th>
                                 <th scope="col">Author</th>
                                 <th scope="col">Status</th>
@@ -64,27 +63,25 @@
                         </thead>
                         <tbody>
                             @forelse ($pages as $key => $value)
-                                <tr>
-                                    {{--
-                                    <td>
-                                        <input type="checkbox" name="bulks[]" value="{{ $value->id }}" data-id="{{ $value->id }}" class="my-form-checkbox ch-bulks">
-                                    </td>
-                                    --}}
+                                    @php
+                                    $slug = $value->post_slug == 'frontpage' ? '/' : $value->post_slug;
+                                    @endphp
                                     <td class="post-column">
                                         {{-- post title --}}
                                         <a
-                                            href="{{ route('posts-show', ['slug' => $value->post_slug]) }}"
+                                            href="{{ route('posts-show', ['slug' => $slug]) }}"
                                             target="_blank"
                                             class="text-decoration-none post-title">
                                                 {{ Str::limit($value->post_title, 120, '...') }}
                                         </a>
 
-                                        {{-- post action (view/edit/delete) --}}
+                                        {{-- post action (view/quick edit/edit) --}}
                                         <div class="post-title-action" data-post-id="{{ $value->id }}">
-                                            <a href="{{ route('posts-show', ['slug' => $value->post_slug]) }}" target="_blank" class="text-decoration-none">View</a>
-                                            <a href="javascript:void(0)" class="text-decoration-none quick-edit-btn">Quick Edit</a>
-                                            <a href="{{ route('pages-edit', ['id' => $value->id]) }}" class="text-decoration-none edit-post">Edit</a>
-                                            {{-- <a href="{{ route('pages-delete', ['id' => $value->id]) }}" class="text-decoration-none delete-post" onclick="return confirm('Are you sure')">Delete</a> --}}
+                                            <a  href="{{ route('posts-show', ['slug' => $slug]) }}" target="_blank"
+                                                class="text-decoration-none">View</a>
+                                            <a  href="javascript:void(0)" class="text-decoration-none quick-edit-btn">Quick Edit</a>
+                                            <a  href="{{ route('pages-edit', ['slug' => $value->post_slug, 'id' => $value->id]) }}"
+                                                class="text-decoration-none edit-post">Edit</a>
                                         </div>
 
                                         {{-- post edit field --}}

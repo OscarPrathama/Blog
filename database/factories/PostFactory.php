@@ -29,7 +29,7 @@ class PostFactory extends Factory
             'post_title' => $title,
             'user_id' => User::all()->random()->id,
             'post_slug' => Str::slug($title),
-            'post_type' => $this->faker->randomElement(['post', 'product', 'page']),
+            'post_type' => $this->faker->randomElement(['post', 'product']),
             'post_content' => $this->faker->paragraph(),
             'post_status' => $status[rand(0, 1)],
         ];

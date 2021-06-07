@@ -18,6 +18,12 @@ Route::get('/admin/my-profile', 'Admin\UserController@myProfile')->middleware(['
 
 Route::middleware('auth')->group(function(){
 
+    // frontpage
+    Route::prefix('admin/pages/frontpage')->group(function(){
+        Route::get('edit/{id}', 'Admin\Pages\FrontpageController@edit')->name('frontpage-edit');
+        Route::patch('update/{id}', 'Admin\Pages\FrontpageController@update')->name('frontpage-update');
+    });
+
     // pages
     Route::prefix('admin/pages')->group(function(){
         Route::get('/', 'Admin\PageController@index')->name('pages-index');
@@ -25,12 +31,10 @@ Route::middleware('auth')->group(function(){
         Route::get('create', 'Admin\PageController@create')->name('pages-create');
         Route::get('bulk-action', 'Admin\PageController@store')->name('pages-bulk-action');
         Route::get('search', 'Admin\PageController@store')->name('pages-search');
-        Route::get('edit/{id}', 'Admin\PageController@edit')->name('pages-edit');
+        Route::get('{slug}/edit/{id}', 'Admin\PageController@edit')->name('pages-edit');
         Route::post('edit/remove_img/', 'Admin\PageController@editRemoveImage')->name('pages-edit-remove-image');
-        Route::get('update', 'Admin\PageController@store')->name('pages-update');
+        Route::post('update', 'Admin\PageController@store')->name('pages-update');
         Route::post('quick-update', 'Admin\PageController@quickUpdate')->name('pages-quick-edit');
-
-
 
 
         /*
@@ -93,6 +97,11 @@ Route::get('/blogs', 'BlogController@index')->name('blogs');
 Route::get('/about-us', 'AboutUsController@index')->name('about-us');
 Route::get('/contact-us', 'ContactController@index')->name('contact-us');
 Route::get('/posts-api', 'Admin\PostController@postApi')->name('posts-api');
+
+// redirect
+Route::get('/frontpage', function () {
+    return redirect('/');
+});
 
 // Route::get('/admin/dashboard', function () {
 //     return view('__dashboard');

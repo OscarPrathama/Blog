@@ -13,9 +13,6 @@ class Post extends Model
         'user_id', 'post_title', 'post_slug', 'post_type', 'post_content', 'post_status'
     ];
 
-    /*
-    * Posts
-    */
     static function getPosts(){
         $results = Post::leftJoin('users', 'posts.user_id', '=', 'users.id')
                 -> select('posts.*', 'users.name as post_author')

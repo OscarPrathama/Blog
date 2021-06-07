@@ -25,11 +25,11 @@ class PageController extends Controller{
         $data['title'] = 'Edit Page';
         $data['page'] = Post::find($id);
         $get_post_meta = self::getPostMeta($id);
-        $data['post_meta'] = null;
+        $data['post_meta'] = $get_post_meta;
         if ( $get_post_meta ) {
             $data['post_meta'] = json_decode($get_post_meta->value);
         }
-
+// dd($data);
         return view('admin.pages.edit', $data);
     }
 

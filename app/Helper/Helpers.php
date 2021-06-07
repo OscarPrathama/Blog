@@ -16,3 +16,11 @@ if( !function_exists('contentPostFormat') ){
         return strip_tags(htmlspecialchars_decode(\Str::limit($post_content, $post_limit, '...')));
     }
 }
+
+if( !function_exists('killNoDie') ){
+    function killNoDie($data){
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';
+    }
+}

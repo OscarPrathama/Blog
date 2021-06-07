@@ -18,9 +18,12 @@
 		<div class="row create-post-form">
 			<div class="col col-lg-9 mb-sm-5 mb-5">
                 <input type="hidden" name="post_id" value="{{ $page->id }}">
+
+                {{-- title --}}
 				<input type="text" name="post_title" class="form-control mb-1 @error('post_title') is-invalid @enderror" placeholder="Post title" value="{{ old('post_title') ?? $page->post_title }}">
 				@error('post_title') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
 
+                {{-- slug --}}
                 <input type="text" name="post_slug" style="width: 400px;" class="form-control form-control-sm @error('post_slug') is-invalid @enderror" placeholder="Post slug" value="{{ old('post_slug') ?? $page->post_slug }}">
                 @error('post_slug') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 <p class="small">
@@ -31,8 +34,16 @@
                 </p>
                 <div class="mb-4"></div>
 
+                {{-- content --}}
 				<textarea name="post_content" id="postContent" cols="30" rows="10" placeholder="Post content" class="form-control mt-4 @error('post_content') is-invalid @enderror">{{ $page->post_content }}</textarea>
 				@error('post_content') <div class="invalid-feedback">{{ $message }}</div> @enderror
+
+                {{-- custom field --}}
+                @if ($post_meta && !empty($post_meta))
+                    <div class="my-4">
+                        <h3>Custom field here</h3>
+                    </div>
+                @endif
 			</div>
 			<div class="col col-lg-3">
                 <div class="accordion mb-4" id="pagestatusAccordion">
