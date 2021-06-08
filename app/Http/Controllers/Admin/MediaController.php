@@ -13,9 +13,13 @@ class MediaController extends Controller
         $images = PostMeta::latest()->get();
         $data['title'] = 'Images';
         foreach($images as $key => $value){
-            $get_img_data = json_decode($value->value);
-            $data['images'][$key]['id'] = $value->id;
-            $data['images'][$key]['data'] = $get_img_data->post_image_feature;
+            if($value->key == 'post_meta'){
+                $get_img_data = json_decode($value->value);
+                $data['images'][$key]['id'] = $value->id;
+                if (isset($get_img_data->post_image_feature)) {
+                    $data['images'][$key]['data'] = $get_img_data->post_image_feature;
+                }
+            }
         }
 
         return view('admin.media.index', $data);

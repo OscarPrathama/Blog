@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Pages;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\{Controller, HelperController as Helper};
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\PostMeta;
+use App\Models\{ Post, PostMeta};
 
 class FrontpageController extends Controller
 {
@@ -14,12 +13,15 @@ class FrontpageController extends Controller
         $data['page'] = Post::where('post_slug', '=', 'frontpage')
                         -> where('post_type', '=', 'page')
                         -> first();
+
+        // get key post_meta
         $get_post_meta = self::getPostMeta($id, 'post_meta');
         $data['post_meta'] = null;
         if ( $get_post_meta ) {
             $data['post_meta'] = json_decode($get_post_meta->value);
         }
 
+        // get key custom field
         $get_custom_field = self::getPostMeta($id, 'custom_field');
         $data['custom_fields'] = null;
         if ( $get_custom_field ) {
@@ -32,7 +34,21 @@ class FrontpageController extends Controller
     }
 
     function update(Request $request, $id){
+
         // image validate
+        $sliders = ($request->slider);
+        if(!empty($sliders)){
+            foreach ($sliders as $key => $value) {
+                foreach ($value as $key2 => $value2) {
+                    Helper::imgValidate($value2['image']);
+                    // Helper::killNoDie($value2);
+                    $sliders[$key][$key2]['image'] = 'hello';
+                }
+            }
+        }
+        echo '<hr>';
+        dd($sliders);
+        dd();
 
         // field validate
         $post_meta = json_encode($request->slider);

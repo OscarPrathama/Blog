@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Str;
+
 if( !function_exists('imgDefault') ){
     function imgDefault(){
         return asset('images/1-dota.jpg');
@@ -13,7 +15,7 @@ if( !function_exists('getImg') ){
 
 if( !function_exists('contentPostFormat') ){
     function contentPostFormat($post_content, $post_limit){
-        return strip_tags(htmlspecialchars_decode(\Str::limit($post_content, $post_limit, '...')));
+        return strip_tags(htmlspecialchars_decode(Str::limit($post_content, $post_limit, '...')));
     }
 }
 

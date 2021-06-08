@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\PostMeta;
-use App\Models\Inbox;
+use App\Models\{Post, PostMeta, Inbox};
 
 class FrontpageController extends Controller
 {
     function index(){
         $data['title'] = 'Frontpage';
-        $data['slider'] = 'contoh slider';
+        $FP_Meta_Field = PostMeta::where('key', 'custom_field')
+                            -> first();
+        $field_frontpage = json_decode($FP_Meta_Field->value);
+        $data['sliders'] = $field_frontpage->field_frontpage;
         $data['posts'] = Post::getFpPosts();
         foreach( $data['posts'] as $key => $value ){
             if (!empty($value['meta_value'])) {

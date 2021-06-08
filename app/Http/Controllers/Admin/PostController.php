@@ -1,11 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\PostMeta;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use App\Models\{Post, PostMeta};
+// use App\Models\Post;
+// use App\Models\PostMeta;
+
 
 class PostController extends Controller
 {
@@ -53,7 +56,7 @@ class PostController extends Controller
         $last_inserted_id = Post::create([
             'user_id' => $request->post_author,
             'post_title' => $request->post_title,
-            'post_slug' => \Str::slug($request->post_slug),
+            'post_slug' => Str::slug($request->post_slug),
             'post_type' => 'post',
             'post_content' => $request->post_content,
             'post_status' => $request->post_status,
@@ -113,7 +116,7 @@ class PostController extends Controller
             // update image on folder
             $img_old_path = json_decode($post_meta->value);
             if( !empty($img_old_path->post_image_feature->url) ){
-                \Storage::delete('/public'.$img_old_path->post_image_feature->url);
+                Storage::delete('/public'.$img_old_path->post_image_feature->url);
             }
 
             // save to database
@@ -124,7 +127,7 @@ class PostController extends Controller
 
         $post = Post::find($id);
         $post->post_title = $request->post_title;
-        $post->post_slug = \Str::slug($request->post_slug);
+        $post->post_slug = Str::slug($request->post_slug);
         $post->post_content = $request->post_content;
         $post->post_status = $request->post_status;
         $post->save();
@@ -166,7 +169,6 @@ class PostController extends Controller
 
     function postApi(){
         $Posts = Post::all();
-
         return $Posts->toJson();
     }
 
@@ -195,9 +197,9 @@ class PostController extends Controller
             $destination = '/upload/'.date('Y').'/'.date('m');
             $img_upload_name = $image['slug_name'].'.'.$image['extension'];
 
-            if (\Storage::exists('/public'.$destination.'/'.$img_upload_name)) {
+            if (Storage::exists('/public'.$destination.'/'.$img_upload_name)) {
                 $i = 1;
-                while (\Storage::exists('/public'.$destination.'/'.$img_upload_name)) {
+                while (Storage::exists('/public'.$destination.'/'.$img_upload_name)) {
                     $img_upload_name = $image['slug_name'].'-'.$i.'.'.$image['extension'];
                     $i++;
                 }
