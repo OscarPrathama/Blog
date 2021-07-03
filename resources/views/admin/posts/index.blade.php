@@ -9,13 +9,18 @@
 
     <div class="row mb-4">
         <div class="col-md-12">
-            <h3>Posts</h3>
+            <h3>{{ __('Posts') }}</h3>
         </div>
     </div>
 
     <div class="row mb-2">
         <div class="col-md-6">
-            <a href="{{ route('posts-create') }}" class="btn btn-primary mb-sm-3 mb-3">Add new</a>
+            <a href="{{ route('posts-create') }}" class="btn btn-primary mb-sm-3 mb-3">
+                {{ __('Add new') }}
+            </a>
+            <a href="{{ route('posts-export-excel') }}" class="btn btn-success mb-sm-3 mb-3">
+                {{ __('Export Excel') }}
+            </a>
         </div>
         <div class="col-md-3"></div>
         <div class="col-md-3">

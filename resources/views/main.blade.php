@@ -12,17 +12,24 @@
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
+{{-- custom css --}}
+@stack('style')
+
 </head>
 <body class="post-{{ isset($title) ? Str::lower($title) : 'default' }}-template">
 
 {{-- navbar --}}
-@include('layouts.navbar')
+@if ( \Route::current()->getName() != 'login')
+    @include('layouts.navbar')
+@endif
 
 {{-- content --}}
 @yield('content')
 
 {{-- alert --}}
-@include('layouts.footer')
+@if ( \Route::current()->getName() != 'login')
+    @include('layouts.footer')
+@endif
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>

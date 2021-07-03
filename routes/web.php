@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function(){
         Route::post('update/{id}', 'Admin\PostController@update')->name('posts-update');
         Route::get('delete/{id}', 'Admin\PostController@delete')->name('posts-delete');
         Route::post('bulk-action', 'Admin\PostController@bulkAction')->name('posts-bulk-action');
+        Route::get('export-excel', 'Admin\PostController@exportExcel')->name('posts-export-excel');
     });
 
     // media

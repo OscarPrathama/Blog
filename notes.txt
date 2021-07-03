@@ -1,18 +1,30 @@
 admin pages
 =======================
-dashboard
-posts
-create post
-edit post
-post category
-create post category
-edit post category
-media
-inbox
-settings
-    - general
-    - menu
-profile
+-> dashboard
+-> posts (title, slug, content, image, status, updated date)
+    -> create post
+    -> edit post
+-> post category (title, slug, desc, img, updated date)
+    -> create post category
+    -> edit post category
+-> media (alt name)
+-> inbox
+    -> show
+    -> delete
+-> settings
+    -> general
+        -> edit
+        -> update
+    -> menu
+        -> create
+        -> store
+        -> edit
+        -> update
+        -> delete
+-> profile
+    -> edit
+    -> update
+
 
 visitor pages
 =======================
@@ -23,6 +35,7 @@ post detail     -> http://localhost:8000/aspernatur-beatae-delectus-sed-id-rem-n
 blogs           -> http://localhost:8000/blogs
 about us        -> http://localhost:8000/about-us
 contact us      -> http://localhost:8000/contact-us
+single post     ->
 
 
 
@@ -32,3 +45,8 @@ my notes
     -> menu > index.blade.php
     -> admin-script
 -> contact us -> set recaptcha
+
+
+reference links
+=======================
+

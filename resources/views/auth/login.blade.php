@@ -1,3 +1,4 @@
+{{--
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
@@ -54,3 +55,62 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+--}}
+@extends('main')
+
+@push('style')
+<style>
+body{
+    background-color: #eaeaea;
+}
+.login-form-wrapper{
+    margin: auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 1px 2px 3px #0000001f;
+    margin-top: 30%;
+}
+</style>
+@endpush
+
+@section('content')
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <div class="login-form-wrapper">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <!-- Email Address -->
+                    <div class="mb-3">
+                        <input
+                            type="email" name="email" class="form-control" value="{{ old('email') }}"
+                            placeholder="Email" required autofocus />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <input
+                            type="password" name="password" class="form-control"
+                            required autocomplete="current-password" placeholder="Password">
+                    </div>
+
+                    {{-- Remember Me --}}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="remember_me" name="remember">
+                        <label class="form-check-label" for="remember_me">
+                            {{ __('Remember me') }}
+                        </label>
+                    </div>
+
+                    {{-- button submit --}}
+                    <div class="d-flex flex-row-reverse">
+                        <button type="submit" class="btn btn-dark text-right">{{ __('Log in') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

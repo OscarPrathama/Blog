@@ -21,7 +21,6 @@
                 @endforeach
             </div>
             <div class="carousel-inner">
-
                 @foreach ($sliders as $key)
                     <div class="carousel-item {{ $j == 0 ? 'active' : '' }}">
                         <img src="{{ asset('images/admiral.jpg') }}" class="d-block w-100" alt="...">
@@ -44,6 +43,7 @@
         </div>
     </div>
 @endisset
+
 {{-- wording --}}
 <div class="container">
     <div class="row fp-wording">

@@ -6,10 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\{Post, PostMeta};
-// use App\Models\Post;
-// use App\Models\PostMeta;
-
-
+use App\Helper\HelperClass;
 class PostController extends Controller
 {
     function index(){
@@ -218,6 +215,10 @@ class PostController extends Controller
 
             return $image;
         }
+    }
+
+    function exportExcel(){
+        HelperClass::excelExport('Posts', Post::all());
     }
 
     static function getPostMeta($post_id){

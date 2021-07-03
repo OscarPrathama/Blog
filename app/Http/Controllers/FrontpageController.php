@@ -10,7 +10,7 @@ class FrontpageController extends Controller
     function index(){
         $data['title'] = 'Frontpage';
         $FP_Meta_Field = PostMeta::where('key', 'custom_field')
-                            -> first();
+                            ->first();
         $field_frontpage = json_decode($FP_Meta_Field->value);
         $data['sliders'] = $field_frontpage->field_frontpage;
         $data['posts'] = Post::getFpPosts();

@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('post_title');
             $table->string('post_slug', 100)->unique();
-            $table->string('post_type');
+            $table->string('post_type')->default('post');
             $table->longText('post_content')->nullable();
             $table->string('post_status', 20);
             // $table->enum('post_status', ['0', '1']);

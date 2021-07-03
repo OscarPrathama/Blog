@@ -30,8 +30,9 @@ class PostFactory extends Factory
             'user_id' => User::all()->random()->id,
             'post_slug' => Str::slug($title),
             'post_type' => $this->faker->randomElement(['post', 'product']),
-            'post_content' => $this->faker->paragraph(),
+            'post_content' => $this->faker->paragraph(3),
             'post_status' => $status[rand(0, 1)],
+            // 'created_at' => $this->faker->dateTimeBetween('-1 year', '-10 days'),
         ];
     }
 }
