@@ -14,7 +14,6 @@ require __DIR__.'/auth.php';
 */
 
 Route::get('/admin/dashboard', 'Admin\DashboardController@index')->middleware(['auth'])->name('dashboard');
-Route::get('/admin/my-profile', 'Admin\UserController@myProfile')->middleware(['auth'])->name('my-profile');
 
 Route::middleware('auth')->group(function(){
 
@@ -35,17 +34,12 @@ Route::middleware('auth')->group(function(){
         Route::post('edit/remove_img/', 'Admin\PageController@editRemoveImage')->name('pages-edit-remove-image');
         Route::post('update', 'Admin\PageController@store')->name('pages-update');
         Route::post('quick-update', 'Admin\PageController@quickUpdate')->name('pages-quick-edit');
-
-
+        Route::get('export-excel', 'Admin\PageController@exportExcel')->name('pages-export-excel');
         /*
         Route::get('store', 'Admin\PageController@store')->name('pages-store');
         Route::get('delete', 'Admin\PageController@store')->name('pages-delete');
         */
     });
-
-    // Route::prefix('admin/pages/frontpage')->group(function(){
-    //     Route::get('edit/{id}', 'Admin\PageController@create')->name('pages-edit');
-    // });
 
     // posts
     Route::prefix('admin/posts')->group(function () {
@@ -90,6 +84,15 @@ Route::middleware('auth')->group(function(){
         Route::get('', 'Admin\MenuController@index')->name('menus.index');
         Route::post('/update_or_create', 'Admin\MenuController@_updateOrCreate')->name('menus.store');
     });
+
+    // users
+    Route::prefix('admin')->group(function(){
+        Route::resource('users', 'Admin\UserController')->except(['show']);
+        Route::get('/my-profile', 'Admin\UserController@myProfile')->name('users.my-profile');
+        Route::get('/users/search', 'Admin\UserController@search')->name('users.search');
+        Route::get('/users/bulk-action', 'Admin\UserController@bulkAction')->name('users.bulk.action');
+    });
+
 });
 
 Route::get('/', 'FrontpageController@index')->name('frontpage');
@@ -103,6 +106,8 @@ Route::get('/posts-api', 'Admin\PostController@postApi')->name('posts-api');
 Route::get('/frontpage', function () {
     return redirect('/');
 });
+
+
 
 // Route::get('/admin/dashboard', function () {
 //     return view('__dashboard');

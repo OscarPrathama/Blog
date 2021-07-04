@@ -18,16 +18,14 @@
     <div class="row mb-2">
         <div class="col-md-6">
             <a href="{{ route('pages-create') }}" class="btn btn-primary mb-sm-3 mb-3">Add new</a>
-            <a href="{{ route('pages-create') }}" class="btn btn-success mb-sm-3 mb-3">Import Excel</a>
-            <a href="{{ route('pages-create') }}" class="btn btn-success mb-sm-3 mb-3">Export Excel</a>
-            <a href="{{ route('pages-create') }}" class="btn btn-danger mb-sm-3 mb-3">Generate PDF</a>
+            <a href="{{ route('pages-export-excel') }}" class="btn btn-success mb-sm-3 mb-3">Export Excel</a>
         </div>
         <div class="col-md-3"></div>
         <div class="col-md-3">
             <form action="{{ route('pages-index') }}" method="get">
                 <div class="form-group mb-sm-3 mb-3">
-                    <input  type="search" name="s" class="form-control" value="{{ htmlentities(request()->s) }}"
-                            placeholder="Search pages">
+                    <input  type="search" name="s" class="form-control"
+                            value="{{ htmlentities(request()->s) }}" placeholder="Search pages">
                 </div>
             </form>
         </div>
@@ -36,16 +34,7 @@
     <form action="{{ route('pages-bulk-action') }}" method="POST">
         @csrf
         <div class="row mb-3">
-            <div class="col-md-3">
-                <select name="bulk_action" id="bulk_action" class="form-select mb-sm-3 mb-3">
-                    <option value="0" disabled selected>Bulk Action</option>
-                    {{-- <option value="delete">Delete</option> --}}
-                </select>
-            </div>
-            <div class="col-md-3">
-                <input type="submit" class="btn btn-primary">
-            </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-9"></div>
             <div class="col-md-3 text-end">Total : {{ $pages->total() }} results</div>
         </div>
 

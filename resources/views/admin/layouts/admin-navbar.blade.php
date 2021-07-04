@@ -23,15 +23,14 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ request()->is('admin/posts') ? ' active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a  class="nav-link dropdown-toggle {{ request()->is('admin/posts') ? ' active' : '' }}"
+                        href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         Posts
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('posts-index') }}">All Posts</a></li>
                         <li><a class="dropdown-item" href="{{ route('posts-create') }}">Add New</a></li>
-                        {{-- <li><hr class="dropdown-divider"></li> --}}
-                        {{-- <li><a class="dropdown-item" href="#">Add New Category</a></li> --}}
-                        {{-- <li><a class="dropdown-item" href="#">Categories</a></li> --}}
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -45,7 +44,9 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ request()->is('admin/settings') ? ' active' : '' }}" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a  class="nav-link dropdown-toggle {{ request()->is('admin/settings') ? ' active' : '' }}"
+                        href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         Settings
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -53,11 +54,23 @@
                         <li><a class="dropdown-item" href="{{ route('menus.index') }}">Menus</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a
-                        class="nav-link {{ request()->is('admin/my-profile') ? ' active' : '' }}"
-                        aria-current="page"
-                        href="{{ route('my-profile') }}">My Profile</a>
+                <li class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle {{ request()->is('admin/users') ? ' active' : '' }}"
+                        href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Users
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('users.index') }}">All Users</a></li>
+                        <li><a class="dropdown-item" href="{{ route('users.create') }}">Add New</a></li>
+                        <li><a class="dropdown-item" href="{{ route('users.my-profile') }}">My Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Roles</a></li>
+                        <li><a class="dropdown-item" href="#">Add New Role</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Permissions</a></li>
+                        <li><a class="dropdown-item" href="#">Add New Permission</a></li>
+                    </ul>
                 </li>
             </ul>
 

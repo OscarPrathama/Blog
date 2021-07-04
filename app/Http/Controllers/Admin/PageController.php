@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Post;
-use App\Models\PostMeta;
+use App\Models\{Post, PostMeta};
+use App\Helper\HelperClass;
 
 class PageController extends Controller{
 
-    function index(Request $request){
+    public function index(Request $request){
         $data['title'] = 'Pages';
 
         if ($request->s) {
@@ -21,7 +21,7 @@ class PageController extends Controller{
         return view('admin/pages/index', $data);
     }
 
-    function edit($id){
+    public function edit($id){
         $data['title'] = 'Edit Page';
         $data['page'] = Post::find($id);
         $get_post_meta = self::getPostMeta($id);
@@ -29,11 +29,15 @@ class PageController extends Controller{
         if ( $get_post_meta ) {
             $data['post_meta'] = json_decode($get_post_meta->value);
         }
-// dd($data);
+
         return view('admin.pages.edit', $data);
     }
 
-    static function getPostMeta($post_id){
+    public function exportExcel(){
+        HelperClass::excelExport('Pages', Post::getPages());
+    }
+
+    public static function getPostMeta($post_id){
         return PostMeta::where( 'post_id', '=', $post_id )
                             -> where( 'key', '=', 'post_meta' )
                             -> first();
