@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\{
 };
 use App\Models\{User, UserMeta};
 
+use Spatie\Permission\Models\Role;
+use DB;
+
 class UserController extends Controller
 {
 
@@ -39,6 +42,8 @@ class UserController extends Controller
     }
 
     public function create(){
+        $this->ldata['roles'] = Role::pluck('name', 'name')->all();
+
         return view('admin.users.create', $this->ldata);
     }
 
@@ -57,6 +62,8 @@ class UserController extends Controller
 
     public function edit($id){
         $this->ldata['user'] = User::find($id);
+        $this->ldata['roles'] = Role::pluck('name', 'name')->all();
+        $this->ldata['userRole'] = $this->ldata['user']->roles->pluck('name', 'name')->all();
 
         return view('admin.users.edit', $this->ldata);
     }
@@ -75,36 +82,10 @@ class UserController extends Controller
 
         $user = User::find($id);
         $user->update($input);
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+
         return redirect()->route('users.edit', $id)->with('success', 'User Edited');
 
-
-        /*
-        self::userValidate($request);
-
-        if ($request->hasFile('user_img')) {
-
-            $image = self::imgValidate($request);
-
-            // save imgValidate return to variable
-            $meta['user_img'] = $image;
-
-            // get current post meta value
-            $user_meta = self::getUserMeta($id);
-
-            // update image on folder
-            $img_old_path = json_decode($user_meta->value);
-            if( !empty($img_old_path->post_image_feature->url) ){
-                Storage::delete('/public'.$img_old_path->post_image_feature->url);
-            }
-
-            // save to database
-            $user_meta->value = json_encode($meta);
-            $user_meta->save();
-
-        }
-
-        $meta['image_profile'] = $image;
-        */
     }
 
     public function destroy($id){
@@ -121,44 +102,6 @@ class UserController extends Controller
         return view('admin.users.my_profile', $data);
     }
 
-    private static function imgValidate($request){
-        $file = $request->file('user_img');
-        if( $file->isValid() ){
-            $image['name'] = $file->getClientOriginalName();
-            $image['just_name'] = pathinfo($image['name'], PATHINFO_FILENAME);
-            $image['slug_name'] = str_replace(' ', '-', strtolower($image['just_name']));
-            $image['extension'] = $file->getClientOriginalExtension();
-            $image['real_path'] = $file->getRealPath();
-            $image['size'] = $file->getSize();
-            $image['mime_type'] = $file->getMimeType();
-            $image['original_name'] = $file->getClientOriginalName();
-
-            $validated = $request->validate([
-                'user_img' => 'image|mimes:jpeg,png,jpg|max:2048',
-            ]);
-            $destination = '/upload/'.date('Y').'/'.date('m');
-            $img_upload_name = $image['slug_name'].'.'.$image['extension'];
-
-            if (Storage::exists('/public'.$destination.'/'.$img_upload_name)) {
-                $i = 1;
-                while (Storage::exists('/public'.$destination.'/'.$img_upload_name)) {
-                    $img_upload_name = $image['slug_name'].'-'.$i.'.'.$image['extension'];
-                    $i++;
-                }
-            }
-
-            // upload to storage/app/public
-            $request->user_img->storeAs(
-                '/public'.$destination,
-                $img_upload_name
-            );
-
-            $image['url'] = $destination.'/'.$img_upload_name;
-
-            return $image;
-        }
-    }
-
     private static function userValidate($request){
 
         if (\Request::is('admin/users/create')) {
@@ -172,16 +115,5 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,'.$request->id,
             'password' => $pass_validation,
         ]);
-    }
-
-    private static function getUserMeta($user_id){
-        return UserMeta::where('user_id', '=', $user_id)
-                            -> where('key', '=', 'user_image')
-                            -> first();
-        /*
-        return UserMeta::where( 'post_id', '=', $user_id )
-                        -> where( 'key', '=', 'user_image' )
-                        -> first();
-        */
     }
 }

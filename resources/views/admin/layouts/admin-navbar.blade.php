@@ -65,8 +65,8 @@
                         <li><a class="dropdown-item" href="{{ route('users.create') }}">Add New</a></li>
                         <li><a class="dropdown-item" href="{{ route('users.my-profile') }}">My Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Roles</a></li>
-                        <li><a class="dropdown-item" href="#">Add New Role</a></li>
+                        <li><a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a></li>
+                        <li><a class="dropdown-item" href="{{ route('roles.create') }}">Add New Role</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Permissions</a></li>
                         <li><a class="dropdown-item" href="#">Add New Permission</a></li>
@@ -79,8 +79,9 @@
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
+                            <div class="d-inline nav-link">Hi, {{ Auth::user()->name }}</div>
                             <a
-                                class="nav-link"
+                                class="nav-link d-inline"
                                 href="{{ route('logout') }}"
                                 onclick="event.preventDefault();this.closest('form').submit();">
                                 {{ __('Log out') }}</a>

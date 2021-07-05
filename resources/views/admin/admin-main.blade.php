@@ -10,7 +10,7 @@
 <title>@yield('title')</title>
 
 <!-- Bootstrap CSS -->
-<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/admin-style.css') }}" rel="stylesheet">
 
 </head>
@@ -27,7 +27,7 @@
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.bundle.min.js') }}" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
 <script src="{{ asset('vendor/tinymce/jquery.tinymce.min.js') }}"></script>
 <script src="{{ asset('js/admin-script.js') }}"></script>

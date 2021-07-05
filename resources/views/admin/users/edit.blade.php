@@ -36,6 +36,20 @@
                 </div>
 
                 <div class="mb-3">
+                    <strong>Role : </strong><br>
+                    <select name="roles[]" multiple class="form-control">
+                        @forelse ($roles as $item)
+                            <option value="{{ $item }}" {{ in_array($item, $userRole) ? "selected" : "" }}>
+                                {{ $item }}
+                            </option>
+                        @empty
+                            -
+                        @endforelse
+                    </select>
+                    @error('roles') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
+                </div>
+
+                <div class="mb-3">
                     <input
                         type="password" name="password" class="form-control @error('email') is-invalid @enderror"
                         placeholder="Password" autocomplete="new-password">

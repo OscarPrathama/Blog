@@ -70,7 +70,13 @@
 	background-color: #f8f8f9;
 	border: 1px solid #565656;
 }
+.edit-user{
+    margin-right: 5px;
+}
 
+.pl-5{
+    padding-left: 5px;
+}
 /* end */
 
 /* media query */
@@ -130,4 +136,3 @@
     	width: 100% !important;
     }
 }
-

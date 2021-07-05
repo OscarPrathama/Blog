@@ -56,6 +56,7 @@
                                 <th scope="col" class="text-center">Bulks</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Role</th>
                                 <th scope="col">Created At</th>
                             </tr>
                         </thead>
@@ -90,6 +91,7 @@
 
                                     </td>
                                     <td>{{ $value->email }}</td>
+                                    <td>-</td>
                                     <td>{{ $value->created_at->format('d M, Y') }}</td>
                                 </tr>
                             @empty
