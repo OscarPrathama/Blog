@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <input type="submit" class="btn btn-dark" value="Register">
+                    <input type="submit" class="btn btn-dark" value="Update">
                 </div>
             </form>
         </div>

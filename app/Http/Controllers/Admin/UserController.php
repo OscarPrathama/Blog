@@ -24,8 +24,7 @@ class UserController extends Controller
 
     public function index(){
         $data['title'] = 'Users';
-        $data['users'] = User::latest()
-                            -> paginate(10);
+        $data['users'] = User::latest()-> paginate(10);
 
         return view('admin.users.index', $data);
     }
@@ -83,6 +82,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id', $id)->delete();
+        $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.edit', $id)->with('success', 'User Edited');
 

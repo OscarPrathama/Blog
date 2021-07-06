@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         //     'email_verified_at' => now(),
         //     'password' => bcrypt('password'),
         // ]);
-        
+
         User::factory()
             ->count(5)
             ->hasPosts(500)

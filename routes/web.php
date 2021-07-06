@@ -90,14 +90,12 @@ Route::middleware('auth')->group(function(){
         Route::resource('users', 'Admin\UserController')->except(['show']);
         Route::get('/my-profile', 'Admin\UserController@myProfile')->name('users.my-profile');
         Route::get('/users/search', 'Admin\UserController@search')->name('users.search');
-        Route::get('/users/bulk-action', 'Admin\UserController@bulkAction')->name('users.bulk.action');
     });
 
     // roles
     Route::prefix('admin')->group(function(){
         Route::resource('roles', 'Admin\RoleController');
         Route::get('roles/search', 'Admin\RoleController@search')->name('roles.search');
-        Route::get('roles/bulk-action', 'Admin\RoleController@bulkAction')->name('roles.bulk.action');
     });
 
 });

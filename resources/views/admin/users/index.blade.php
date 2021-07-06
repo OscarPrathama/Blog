@@ -30,20 +30,8 @@
         </div>
     </div>
 
-    <form action="{{ route('users.bulk.action') }}" method="POST">
-        @csrf
-        @method('DELETE')
         <div class="row mb-3">
-            <div class="col-md-3">
-                <select name="bulk_action" id="bulk_action" class="form-select mb-sm-3 mb-3">
-                    <option value="0" disabled selected>Bulk Action</option>
-                    <option value="delete">Delete</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <input type="submit" class="btn btn-primary">
-            </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-9"></div>
             <div class="col-md-3 text-end">Total : {{ $users->total() }} results</div>
         </div>
 
@@ -53,21 +41,16 @@
                     <table class="table table-striped table-hover table-bordered admin-user-table">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center">Bulks</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Role</th>
                                 <th scope="col">Created At</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($users as $key => $value)
                                 <tr>
-                                    <td>
-                                        <input
-                                            type="checkbox" name="bulks[]" value="{{ $value->id }}"
-                                            data-id="{{ $value->id }}" class="my-form-checkbox ch-bulks">
-                                    </td>
                                     <td class="user-column">
 
                                         {{-- name --}}
@@ -77,7 +60,17 @@
                                             {{ $value->name }}
                                         </a>
 
-                                        {{-- action (edit/delete) --}}
+                                    </td>
+                                    <td>{{ $value->email }}</td>
+                                    <td>
+                                        @forelse ($value->getRoleNames() as $role)
+                                            <label class="badge bg-primary p-2">{{ $role }}</label>
+                                        @empty
+                                            -
+                                        @endforelse
+                                    </td>
+                                    <td>{{ $value->created_at->format('d M, Y') }}</td>
+                                    <td>
                                         <div class="" data-user-id="{{ $value->id }}">
                                             <a href="{{ route('users.edit', $value->id) }}" class="text-decoration-none edit-user">Edit</a>
                                             <form   action="{{ route('users.destroy', $value->id) }}"
@@ -88,11 +81,7 @@
                                                     class="text-decoration-none btn-delete-user">Delete</a>
                                             </form>
                                         </div>
-
                                     </td>
-                                    <td>{{ $value->email }}</td>
-                                    <td>-</td>
-                                    <td>{{ $value->created_at->format('d M, Y') }}</td>
                                 </tr>
                             @empty
                                 <tr>
@@ -107,7 +96,6 @@
                 </div>
             </div>
         </div>
-    </form>
 
 </div>
 @stop
