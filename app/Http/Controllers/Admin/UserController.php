@@ -19,6 +19,8 @@ class UserController extends Controller
     private $ldata = array();
 
     public function __construct(){
+        $this->middleware(['role:Super Admin|Admin']);
+
         $this->ldata['title'] = 'Users';
     }
 

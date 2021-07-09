@@ -14,6 +14,9 @@ require __DIR__.'/auth.php';
 */
 
 Route::get('/admin/dashboard', 'Admin\DashboardController@index')->middleware(['auth'])->name('dashboard');
+Route::get('/admin', function () {
+    return redirect('/admin/dashboard');
+});
 
 Route::middleware('auth')->group(function(){
 
@@ -94,8 +97,14 @@ Route::middleware('auth')->group(function(){
 
     // roles
     Route::prefix('admin')->group(function(){
-        Route::resource('roles', 'Admin\RoleController');
+        Route::resource('roles', 'Admin\RoleController')->except(['show']);
         Route::get('roles/search', 'Admin\RoleController@search')->name('roles.search');
+    });
+
+    // permissions
+    Route::prefix('admin')->group(function(){
+        Route::get('permissions', 'Admin\PermissionController@index')->name(('permissions.index'));
+        Route::get('search', 'Admin\PermissionController@Search')->name('permissions.search');
     });
 
 });

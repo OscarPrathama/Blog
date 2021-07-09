@@ -1,52 +1,50 @@
 admin pages
 =======================
--> dashboard
--> posts (title, slug, content, image, status, updated date)
-    -> create post
-    -> edit post
--> post category (title, slug, desc, img, updated date)
-    -> create post category
-    -> edit post category
--> media (alt name)
--> inbox
-    -> show
-    -> delete
--> settings
-    -> general
-        -> edit
-        -> update
-    -> menu
-        -> create
-        -> store
-        -> edit
-        -> update
+    -> dashboard
+    -> posts (title, slug, content, image, status, updated date)
+        -> create post
+        -> edit post
+    -> post category (title, slug, desc, img, updated date)
+        -> create post category
+        -> edit post category
+    -> media (alt name)
+    -> inbox
+        -> show
         -> delete
--> profile
-    -> edit
-    -> update
+    -> settings
+        -> general
+            -> edit
+            -> update
+        -> menu
+            -> create
+            -> store
+            -> edit
+            -> update
+            -> delete
+    -> profile
+        -> edit
+        -> update
 
 
 visitor pages
 =======================
-register
-login
-frontpage       -> http://localhost:8000/
-post detail     -> http://localhost:8000/aspernatur-beatae-delectus-sed-id-rem-numquam
-blogs           -> http://localhost:8000/blogs
-about us        -> http://localhost:8000/about-us
-contact us      -> http://localhost:8000/contact-us
-single post     ->
+    login           -> http://localhost:8000/login-admin
+    frontpage       -> http://localhost:8000/
+    post detail     -> http://localhost:8000/aspernatur-beatae-delectus-sed-id-rem-numquam
+    blogs           -> http://localhost:8000/blogs
+    about us        -> http://localhost:8000/about-us
+    contact us      -> http://localhost:8000/contact-us
 
 
 
-my notes
+pr
 =======================
 -> admin menu field msh salah
     -> menu > index.blade.php
     -> admin-script
 -> contact us -> set recaptcha
+-> user status admin, msh bsa update super admin, harusnya hanya super admin yang bisa update super admin
+->
 
 
-reference links
-=======================
 

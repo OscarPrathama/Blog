@@ -68,8 +68,7 @@
                         <li><a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a></li>
                         <li><a class="dropdown-item" href="{{ route('roles.create') }}">Add New Role</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Permissions</a></li>
-                        <li><a class="dropdown-item" href="#">Add New Permission</a></li>
+                        <li><a class="dropdown-item" href="{{ route('permissions.index') }}">Permissions</a></li>
                     </ul>
                 </li>
             </ul>

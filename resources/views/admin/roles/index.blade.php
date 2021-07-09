@@ -30,7 +30,6 @@
         </div>
     </div>
 
-
     <div class="row mb-3">
         <div class="col-md-9"></div>
         <div class="col-md-3 text-end">Total : {{ $roles->total() }} results</div>
@@ -42,7 +41,6 @@
                 <table class="table table-striped table-hover table-bordered admin-role-table">
                     <thead>
                         <tr>
-                            <th scope="col" class="text-center">Bulks</th>
                             <th scope="col">Role</th>
                             <th scope="col">Guard</th>
                             <th scope="col">Date Created</th>
@@ -52,13 +50,10 @@
                     <tbody>
                         @forelse ($roles as $key => $value)
                             <tr>
-                                <td>
-                                    <input type="checkbox" name="bulks[]" value="{{ $value->id }}" data-id="{{ $value->id }}" class="my-form-checkbox ch-bulks">
-                                </td>
                                 <td class="role-column">
                                     {{-- role name --}}
                                     <a
-                                        href="{{ route('roles.show', $value->id) }}"
+                                        href="{{ route('roles.edit', $value->id) }}"
                                         target="_blank"
                                         class="text-decoration-none role-name">
                                             {{ $value->name }}
@@ -75,14 +70,16 @@
                                     <a href="{{ route('roles.edit', $value->id) }}" class="text-decoration-none edit-role me-1">
                                         Edit/View
                                     </a>
-                                    <form
-                                        action="{{ route('roles.destroy', $value->id) }}"
-                                        method="POST" class="d-inline delete-role">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a  href="javascript:void(0)"
-                                            class="text-decoration-none btn-delete-role">Delete</a>
-                                    </form>
+                                    @if ($value->name !== 'Super Admin')
+                                        <form
+                                            action="{{ route('roles.destroy', $value->id) }}"
+                                            method="POST" class="d-inline delete-role">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a  href="javascript:void(0)"
+                                                class="text-decoration-none btn-delete-role">Delete</a>
+                                        </form>
+                                    @endif
                                 </td>
 
                             </tr>

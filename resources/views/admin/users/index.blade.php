@@ -45,7 +45,9 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Role</th>
                                 <th scope="col">Created At</th>
-                                <th scope="col">Action</th>
+                                @role('Super Admin|Admin')
+                                    <th scope="col">Action</th>
+                                @endrole
                             </tr>
                         </thead>
                         <tbody>
@@ -70,18 +72,24 @@
                                         @endforelse
                                     </td>
                                     <td>{{ $value->created_at->format('d M, Y') }}</td>
-                                    <td>
-                                        <div class="" data-user-id="{{ $value->id }}">
-                                            <a href="{{ route('users.edit', $value->id) }}" class="text-decoration-none edit-user">Edit</a>
-                                            <form   action="{{ route('users.destroy', $value->id) }}"
-                                                    method="POST" class="d-inline delete-user">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a  href="javascript:void(0)"
-                                                    class="text-decoration-none btn-delete-user">Delete</a>
-                                            </form>
-                                        </div>
-                                    </td>
+                                    @role('Super Admin|Admin')
+                                        <td>
+                                            @if ($role !== 'Super Admin')
+                                                <div class="" data-user-id="{{ $value->id }}">
+                                                    <a href="{{ route('users.edit', $value->id) }}" class="text-decoration-none edit-user">Edit</a>
+                                                    <form   action="{{ route('users.destroy', $value->id) }}"
+                                                            method="POST" class="d-inline delete-user">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a  href="javascript:void(0)"
+                                                            class="text-decoration-none btn-delete-user">Delete</a>
+                                                    </form>
+                                                </div>
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                    @endrole
                                 </tr>
                             @empty
                                 <tr>

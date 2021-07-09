@@ -10,23 +10,21 @@
     {{-- page title --}}
     <div class="row mb-4">
         <div class="col-md-12">
-            <h3>{{ __('Edit Role') }}</h3>
+            <h3>{{ __('Add New Role') }}</h3>
         </div>
     </div>
 
     {{-- page content --}}
     <div class="row">
         <div class="col-12 col-md-4">
-            <form action="{{ route('roles.update', $role->id) }}" method="POST">
+            <form action="{{ route('roles.store') }}" method="POST">
                 @csrf
-                @method('PATCH')
 
                 {{-- permission name --}}
                 <div class="mb-3">
                     <input
                         type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                        placeholder="Name" value="{{ old('name') ?? $role->name }}" required
-                        {{ $role->name == 'Super Admin' ? 'disabled' : 'autofocus' }} >
+                        placeholder="Name" value="{{ old('name') }}" required autofocus>
                     @error('name') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
                 </div>
 
@@ -34,18 +32,18 @@
                 <div class="mb-3">
                     @forelse ($permissions as $value)
                         <label class="pl-5">
-                            <input type="checkbox" name="permission[]" value="{{ $value->id }}"
-                            {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }} >
+                            <input type="checkbox" name="permission[]" value="{{ $value->id }}" >
                             {{ $value->name }}
                         </label>
                     @empty
-                        {{ __('You have no permissions yet') }}
+                        {{ __('No Permission list') }}
                     @endforelse
+                    @error('permission') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
                 </div>
 
                 {{-- button submit --}}
                 <div class="mb-3">
-                    <input type="submit" class="btn btn-dark" value="Update">
+                    <input type="submit" class="btn btn-dark" value="Submit">
                 </div>
 
             </form>
