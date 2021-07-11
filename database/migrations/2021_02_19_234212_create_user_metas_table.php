@@ -17,7 +17,7 @@ class CreateUserMetasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('key');
-            $table->string('value')->nullable();
+            $table->longText('value')->nullable();
             $table->timestamps();
         });
     }

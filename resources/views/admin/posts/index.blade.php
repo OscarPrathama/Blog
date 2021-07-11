@@ -22,19 +22,11 @@
                 {{ __('Export Excel') }}
             </a>
         </div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3">
-            <form action="{{ route('posts-search') }}" method="get">
-                <div class="form-group mb-sm-3 mb-3">
-                    <input  type="search" name="s" class="form-control" value="{{ htmlentities(request()->s) }}"
-                            placeholder="Search posts">
-                </div>
-            </form>
-        </div>
+        <div class="col-md-6"></div>
     </div>
 
-    <form action="{{ route('posts-bulk-action') }}" method="POST">
-        @csrf
+    {{-- <form action="{{ route('posts-bulk-action') }}" method="POST"> --}}
+        {{-- @csrf --}}
         <div class="row mb-3">
             <div class="col-md-3">
                 <select name="bulk_action" id="bulk_action" class="form-select mb-sm-3 mb-3">
@@ -46,13 +38,23 @@
                 <input type="submit" class="btn btn-primary">
             </div>
             <div class="col-md-3"></div>
-            <div class="col-md-3 text-end">Total : {{ $posts->total() }} results</div>
+            <div class="col-md-3 text-end">
+                <form action="{{ route('posts-search') }}" method="get">
+                    <div class="form-group mb-sm-3 mb-3">
+                        <input  type="search" name="s" class="form-control" value="{{ htmlentities(request()->s) }}"
+                                placeholder="Search posts">
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
+                <div class="total-post text-end">
+                    Total : {{ $posts->total() }} results
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover table-bordered admin-post-table">
+                    <table class="table table-hover table-bordered admin-post-table">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">Bulks</th>
@@ -127,7 +129,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    {{-- </form> --}}
 
 </div>
 @stop

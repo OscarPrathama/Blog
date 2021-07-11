@@ -63,7 +63,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('users.index') }}">All Users</a></li>
                         <li><a class="dropdown-item" href="{{ route('users.create') }}">Add New</a></li>
-                        <li><a class="dropdown-item" href="{{ route('users.my-profile') }}">My Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('users.show', Auth::user()->id ) }}">My Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a></li>
                         <li><a class="dropdown-item" href="{{ route('roles.create') }}">Add New Role</a></li>

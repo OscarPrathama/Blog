@@ -44,7 +44,7 @@ class PostController extends Controller
         if ($request->hasFile('post_img_feature')) {
             $image = self::imgValidate($request);
         }else{
-             $image = '';
+            $image = '';
         }
 
         $meta['post_image_feature'] = $image;

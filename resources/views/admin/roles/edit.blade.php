@@ -26,7 +26,7 @@
                     <input
                         type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                         placeholder="Name" value="{{ old('name') ?? $role->name }}" required
-                        {{ $role->name == 'Super Admin' ? 'disabled' : 'autofocus' }} >
+                        {{ $role->name == 'Admin' ? 'disabled' : 'autofocus' }} >
                     @error('name') <div class="invalid-feedback mb-3">{{ $message }}</div> @enderror
                 </div>
 

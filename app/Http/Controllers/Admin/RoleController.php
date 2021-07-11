@@ -14,7 +14,7 @@ class RoleController extends Controller
 
     function __construct()
     {
-        $this->middleware(['role:Super Admin']);
+        $this->middleware(['role:Admin']);
 
         $this->data['title'] = 'Roles';
     }

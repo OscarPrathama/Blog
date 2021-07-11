@@ -30,80 +30,67 @@
         </div>
     </div>
 
-        <div class="row mb-3">
-            <div class="col-md-9"></div>
-            <div class="col-md-3 text-end">Total : {{ $users->total() }} results</div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover table-bordered admin-user-table">
-                        <thead>
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" text-end">Total : {{ $users->total() }} results</div>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered admin-user-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Created At</th>
+                            @role('Admin')
+                                <th scope="col">Action</th>
+                            @endrole
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($users as $key => $value)
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Created At</th>
-                                @role('Super Admin|Admin')
-                                    <th scope="col">Action</th>
+                                <td class="user-column">
+                                    <a href="{{ route('users.show', $value->id) }}" class="text-decoration-none">
+                                        {{ $value->name }}
+                                    </a>
+                                </td>
+                                <td>{{ $value->email }}</td>
+                                <td>
+                                    @forelse ($value->getRoleNames() as $role)
+                                        <label class="badge bg-primary p-2">{{ $role }}</label>
+                                    @empty
+                                        -
+                                    @endforelse
+                                </td>
+                                <td>{{ $value->created_at->format('d M, Y') }}</td>
+                                @role('Admin')
+                                    <td>
+                                        <div class="" data-user-id="{{ $value->id }}">
+                                            <a href="{{ route('users.edit', $value->id) }}" class="text-decoration-none edit-user">Edit</a>
+                                            <form   action="{{ route('users.destroy', $value->id) }}"
+                                                    method="POST" class="d-inline delete-user">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a  href="javascript:void(0)"
+                                                    class="text-decoration-none btn-delete-user">Delete</a>
+                                            </form>
+                                        </div>
+                                    </td>
                                 @endrole
                             </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($users as $key => $value)
-                                <tr>
-                                    <td class="user-column">
-
-                                        {{-- name --}}
-                                        <a
-                                            href="{{ route('users.edit', $value->id) }}"
-                                            class="text-decoration-none">
-                                            {{ $value->name }}
-                                        </a>
-
-                                    </td>
-                                    <td>{{ $value->email }}</td>
-                                    <td>
-                                        @forelse ($value->getRoleNames() as $role)
-                                            <label class="badge bg-primary p-2">{{ $role }}</label>
-                                        @empty
-                                            -
-                                        @endforelse
-                                    </td>
-                                    <td>{{ $value->created_at->format('d M, Y') }}</td>
-                                    @role('Super Admin|Admin')
-                                        <td>
-                                            @if ($role !== 'Super Admin')
-                                                <div class="" data-user-id="{{ $value->id }}">
-                                                    <a href="{{ route('users.edit', $value->id) }}" class="text-decoration-none edit-user">Edit</a>
-                                                    <form   action="{{ route('users.destroy', $value->id) }}"
-                                                            method="POST" class="d-inline delete-user">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <a  href="javascript:void(0)"
-                                                            class="text-decoration-none btn-delete-user">Delete</a>
-                                                    </form>
-                                                </div>
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                    @endrole
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="text-center">There is no Users</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-                <div class="pagination">
-                    {{ $users->links() }}
-                </div>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">There is no Users</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                {{ $users->links() }}
             </div>
         </div>
+    </div>
 
 </div>
 @stop

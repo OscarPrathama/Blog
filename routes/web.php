@@ -90,9 +90,9 @@ Route::middleware('auth')->group(function(){
 
     // users
     Route::prefix('admin')->group(function(){
-        Route::resource('users', 'Admin\UserController')->except(['show']);
-        Route::get('/my-profile', 'Admin\UserController@myProfile')->name('users.my-profile');
+        Route::resource('users', 'Admin\UserController');
         Route::get('/users/search', 'Admin\UserController@search')->name('users.search');
+        Route::post('/users/remove_user_image', 'Admin\UserController@removeImage')->name('user.edit.remove.image');
     });
 
     // roles

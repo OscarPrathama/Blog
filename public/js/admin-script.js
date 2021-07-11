@@ -1,5 +1,47 @@
 (function($){
 
+    /**
+     * Global configs
+    */
+
+    /**
+     * Dashboard
+    */
+
+    /**
+     * Page
+    */
+
+    /**
+     * Post
+    */
+
+    /**
+     * Media
+    */
+
+    /**
+     * Inbox
+    */
+
+    /**
+     * Settings - General
+    */
+
+    /**
+     * Settings - Menu
+    */
+
+    /**
+     * Users
+    */
+    $('[name=user_img]').on('change', function(){
+        readURL(this);
+        $('a#removeImgPreview').css('display', 'block');
+    });
+
+
+
     // bulks admin checkbox
     var $table = $('.admin-post-table, .admin-inbox-table');
     var $chkbxs = $('.admin-post-table .ch-bulks, .admin-inbox-table .ch-bulks');
@@ -33,15 +75,16 @@
             'removeformat | help',
     });
 
-    // image for create & edit post
+    // global setup for image upload
     let img_preview = $('#imgPreview');
     let remove_img_preview = $('a#removeImgPreview');
+
+    // image for create & edit post
     let remove_img_preview_post_create = $('.post-create a#removeImgPreview');
     $('[name=post_img_feature]').on('change', function(){
         readURL(this);
         remove_img_preview.css('display', 'block');
     });
-
     remove_img_preview_post_create.on('click', function(){
         if(confirm('Are you sure ?') == true){
             img_preview.attr('src', '');

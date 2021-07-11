@@ -2,13 +2,13 @@
 use Illuminate\Support\Str;
 
 if( !function_exists('imgDefault') ){
-    function imgDefault(){
-        return asset('images/1-dota.jpg');
+    function imgDefault($image = '1-dota.jpg'){
+        return asset('images/'.$image);
     }
 }
 
 if( !function_exists('getImg') ){
-    function getImg($img_url){
+    function getImg($img_url = ''){
         return asset('storage'.$img_url);
     }
 }

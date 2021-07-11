@@ -122,7 +122,7 @@ remove_img_preview.on('click', function(){
                 post_id: $('[name=post_id]').val()
             },
             success: function (res) {
-                console.log(res)
+                // console.log(res)
             }
         });
     }

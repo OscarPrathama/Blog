@@ -30,7 +30,7 @@
 #imgPreview{
 	width: 200px;
 	display: block;
-    margin: 11px auto;
+	margin: 11px auto;
 }
 
 #removeImgPreview{
@@ -90,7 +90,22 @@ footer > .footer-content{
 	justify-content: flex-end;
 	margin-right: 15px;
 }
-
+.post-users-template .img-thumbnail#imgPreview{
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    border: none;
+}
+.post-users-template #removeImgPreview{
+	margin-left: 0;
+}
+table.admin-post-table td,
+table.admin-user-table td{
+    background-color: white;
+}
+body{
+    background-color: #f4f5f7;
+}
 /* end */
 
 /* media query */

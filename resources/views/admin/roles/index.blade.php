@@ -70,7 +70,7 @@
                                     <a href="{{ route('roles.edit', $value->id) }}" class="text-decoration-none edit-role me-1">
                                         Edit/View
                                     </a>
-                                    @if ($value->name !== 'Super Admin')
+                                    @if ($value->name !== 'Admin')
                                         <form
                                             action="{{ route('roles.destroy', $value->id) }}"
                                             method="POST" class="d-inline delete-role">

@@ -13,7 +13,7 @@ class PermissionController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['role:Super Admin']);
+        $this->middleware(['role:Admin']);
 
         $this->ldata['title'] = 'Permissions';
     }
